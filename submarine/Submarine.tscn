@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://submarine/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://submarine/Submarine.gd" type="Script" id=1]
+[ext_resource path="res://submarine/tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://submarine/ladder.gd" type="Script" id=3]
+[ext_resource path="res://room/Room.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -14,11 +17,13 @@ extents = Vector2( 100, 1000 )
 
 [node name="Submarine" type="Node2D" index="0"]
 
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
-scale = Vector2( 0.2, 0.2 )
 mode = 0
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 2 )
 cell_size = Vector2( 256, 256 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -45,15 +50,49 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/ladder" index="0"]
 
-position = Vector2( 1400, 1540 )
+position = Vector2( 1408, 1536 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="TileMap/ladder" index="1"]
 
-position = Vector2( 3720, 1540 )
+position = Vector2( 3712, 1536 )
 shape = SubResource( 2 )
+
+[node name="EngineRoom" parent="TileMap" index="1" instance=ExtResource( 4 )]
+
+position = Vector2( 768, 1536 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="Instrumentation" parent="TileMap" index="2" instance=ExtResource( 4 )]
+
+position = Vector2( 3072, 768 )
+
+[node name="WeaponControl" parent="TileMap" index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 3072, 1536 )
+
+[node name="TorpedoBay" parent="TileMap" index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 3072, 2304 )
+
+[node name="LifeSupport" parent="TileMap" index="5" instance=ExtResource( 4 )]
+
+position = Vector2( 2048, 768 )
+
+[node name="PumpRoom" parent="TileMap" index="6" instance=ExtResource( 4 )]
+
+position = Vector2( 2048, 1536 )
+
+[node name="MedBay" parent="TileMap" index="7" instance=ExtResource( 4 )]
+
+position = Vector2( 2048, 2304 )
+
+[node name="Bridge" parent="TileMap" index="8" instance=ExtResource( 4 )]
+
+position = Vector2( 4352, 1536 )
 
 

@@ -32,7 +32,7 @@ extents = Vector2( 10, 48 )
 custom_solver_bias = 0.0
 extents = Vector2( 128, 10 )
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=32]
 
 custom_solver_bias = 0.0
 extents = Vector2( 128, 10 )
@@ -278,7 +278,7 @@ extents = Vector2( 128, 10 )
 12/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
-"shape": SubResource( 16 ),
+"shape": SubResource( 32 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 128, 248 )
 } ]
 
