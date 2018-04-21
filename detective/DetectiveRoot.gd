@@ -4,9 +4,6 @@ var solution = {"location":null, "traitor":null}
 
 
 func _ready():
-    # Called every time the node is added to the scene.
-    # Initialization here
-    
     # NUM_CREW must be the same as the number of crewman nodes
     var NUM_CREW = 8
     
@@ -36,7 +33,4 @@ func _ready():
     
     solution["location"] = rooms[randi() % 8]    
     
-#func _process(delta):
-#    # Called every frame. Delta is time since last frame.
-#    # Update game logic here.
-#    pass
+

@@ -3,6 +3,8 @@ extends Area2D
 # Each crewman has a name, and is the traitor or not
 var crew_name = null
 var traitor = false
+var hitpoints = 100
+var happiness = 10
 
 
 func _ready():
