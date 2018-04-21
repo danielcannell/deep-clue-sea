@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 # Member variables
-const GRAVITY = 500.0 # pixels/second/second
+const GRAVITY = 1000.0 # pixels/second/second
 
 const JUMP_SPEED = 200
 const JUMP_MAX_AIRBORNE_TIME = 0.2
@@ -22,6 +22,8 @@ func _ready():
     # Called every time the node is added to the scene.
     # Initialization here
     pass
+    print(get_position())
+    print('Ready!')
 
 func _enter_ladder():
     is_on_ladder = true
@@ -32,6 +34,8 @@ func _exit_ladder():
 func _physics_process(delta):
     # Create forces
     var force = Vector2(0, GRAVITY)
+    
+    print(get_position())
 
     var walk_left = Input.is_action_pressed("move_left")
     var walk_right = Input.is_action_pressed("move_right")
@@ -56,13 +60,14 @@ func _physics_process(delta):
 
     # Integrate forces to velocity
     velocity += force * delta
+    
     # Integrate velocity into motion and move
     velocity = move_and_slide(velocity, Vector2(0, -1))
 
     if is_on_floor():
         on_air_time = 0
 
-    if jumping and velocity.y > 0:
+    if jumping and velocity.y >= 0:
         # If falling, no longer jumping
         jumping = false
 
