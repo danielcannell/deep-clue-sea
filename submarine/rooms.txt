@@ -1,0 +1,8 @@
+Instrumentation/Sonar
+Life Support
+Engine Room
+Weapon Control
+Med Bay
+Bridge
+Pump Room
+Torpedo Room
