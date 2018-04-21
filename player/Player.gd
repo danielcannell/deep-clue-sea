@@ -22,8 +22,6 @@ func _ready():
     # Called every time the node is added to the scene.
     # Initialization here
     pass
-    print(get_position())
-    print('Ready!')
 
 func _enter_ladder():
     is_on_ladder = true
@@ -34,8 +32,6 @@ func _exit_ladder():
 func _physics_process(delta):
     # Create forces
     var force = Vector2(0, GRAVITY)
-    
-    print(get_position())
 
     var walk_left = Input.is_action_pressed("move_left")
     var walk_right = Input.is_action_pressed("move_right")
