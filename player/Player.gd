@@ -3,12 +3,11 @@ extends KinematicBody2D
 # Member variables
 const GRAVITY = 500.0 # pixels/second/second
 
-const WALK_FORCE = 600
-const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 200
-const STOP_FORCE = 1300
 const JUMP_SPEED = 200
 const JUMP_MAX_AIRBORNE_TIME = 0.2
+
+const WALK_SPEED = 200
+const CLIMB_SPEED = 200
 
 const SLIDE_STOP_VELOCITY = 1.0 # one pixel/second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # one pixel
@@ -17,10 +16,18 @@ var velocity = Vector2()
 var on_air_time = 100
 var jumping = false
 
+var is_on_ladder = false
+
 func _ready():
     # Called every time the node is added to the scene.
     # Initialization here
     pass
+
+func _enter_ladder():
+    is_on_ladder = true
+
+func _exit_ladder():
+    is_on_ladder = false
 
 func _physics_process(delta):
     # Create forces
@@ -28,28 +35,24 @@ func _physics_process(delta):
 
     var walk_left = Input.is_action_pressed("move_left")
     var walk_right = Input.is_action_pressed("move_right")
+    var climb_up = Input.is_action_pressed("move_up")
+    var climb_down = Input.is_action_pressed("move_down")
     var jump = Input.is_action_just_pressed("jump")
 
-    var stop = true
+    if is_on_ladder:
+        force.y = 0
+        velocity.y = 0
+        if climb_up:
+            velocity.y = -CLIMB_SPEED
+        elif climb_down:
+            velocity.y = CLIMB_SPEED
 
     if walk_left:
-        if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
-            force.x -= WALK_FORCE
-            stop = false
+        velocity.x = -WALK_SPEED
     elif walk_right:
-        if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
-            force.x += WALK_FORCE
-            stop = false
-
-    if stop:
-        var vsign = sign(velocity.x)
-        var vlen = abs(velocity.x)
-
-        vlen -= STOP_FORCE * delta
-        if vlen < 0:
-            vlen = 0
-
-        velocity.x = vlen * vsign
+        velocity.x = WALK_SPEED
+    else:
+        velocity.x = 0
 
     # Integrate forces to velocity
     velocity += force * delta
@@ -70,3 +73,13 @@ func _physics_process(delta):
         jumping = true
 
     on_air_time += delta
+
+func _on_Area2D_area_entered(area):
+    if area.get_name() == "ladder":
+        print("Ladder!")
+        is_on_ladder = true
+
+func _on_Area2D_area_exited(area):
+    if area.get_name() == "ladder":
+        print("No Ladder!")
+        is_on_ladder = false
