@@ -19,3 +19,6 @@ func fire():
     
 func flooding():
     return 0.0
+
+func centre_position():
+    return get_node("CollisionShape2D").shape.extents + position
