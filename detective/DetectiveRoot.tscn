@@ -1,42 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://detective/DetectiveRoot.gd" type="Script" id=1]
-[ext_resource path="res://crewmen/Crewman.tscn" type="PackedScene" id=2]
 
 [node name="DetectiveRoot" type="Node" index="0"]
 
 script = ExtResource( 1 )
-
-[node name="Crewman0" parent="." index="0" instance=ExtResource( 2 )]
-
-position = Vector2( 149.115, 440.557 )
-
-[node name="Crewman1" parent="." index="1" instance=ExtResource( 2 )]
-
-position = Vector2( 946.174, 166.084 )
-
-[node name="Crewman2" parent="." index="2" instance=ExtResource( 2 )]
-
-position = Vector2( 611.39, 166.133 )
-
-[node name="Crewman3" parent="." index="3" instance=ExtResource( 2 )]
-
-position = Vector2( 762.678, 456.775 )
-
-[node name="Crewman4" parent="." index="4" instance=ExtResource( 2 )]
-
-position = Vector2( 424.32, 382.288 )
-
-[node name="Crewman5" parent="." index="5" instance=ExtResource( 2 )]
-
-position = Vector2( 943.203, 445.903 )
-
-[node name="Crewman6" parent="." index="6" instance=ExtResource( 2 )]
-
-position = Vector2( 258.719, 193.816 )
-
-[node name="Crewman7" parent="." index="7" instance=ExtResource( 2 )]
-
-position = Vector2( 774.683, 146.43 )
 
 
