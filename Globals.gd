@@ -18,3 +18,14 @@ enum Rooms {
     MiddleRightLadder,
     LowerRightLadder,
 }
+
+const Rooms_list = [
+    Rooms.EngineRoom,
+    Rooms.Instrumentation,
+    Rooms.WeaponControl,
+    Rooms.TorpedoBay,
+    Rooms.LifeSupport,
+    Rooms.PumpRoom,
+    Rooms.MedBay,
+    Rooms.Bridge
+]
