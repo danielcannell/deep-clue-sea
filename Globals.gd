@@ -19,7 +19,7 @@ enum Rooms {
     LowerRightLadder,
 }
 
-const Rooms_list = [
+const ROOMS_LIST = [
     Rooms.EngineRoom,
     Rooms.Instrumentation,
     Rooms.WeaponControl,

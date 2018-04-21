@@ -12,11 +12,17 @@ func _ready():
     room(Globals.Rooms.PumpRoom).set_id(Globals.Rooms.PumpRoom)
     room(Globals.Rooms.MedBay).set_id(Globals.Rooms.MedBay)
     room(Globals.Rooms.Bridge).set_id(Globals.Rooms.Bridge)
+    
+    for rm in Globals.ROOMS_LIST:
+        room(rm).connect("clicked", self, "room_clicked")
 
 func _process(delta):
     # Called every frame. Delta is time since last frame.
     # Update game logic here.
     pass
+
+func room_clicked(id):
+    print("Clicked", id)
 
 func room(room_id):
     match room_id:

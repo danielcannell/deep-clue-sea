@@ -10,6 +10,8 @@ var m_fire = 0.0
 var m_flooding = 0.0
 var m_id = null
 
+signal clicked(id)
+
 func _ready():
     pass
 
@@ -18,6 +20,11 @@ func _process(delta):
         m_fire += BURN_RATE
     if m_flooding > 0.0:
         m_flooding += FLOOD_RATE
+
+func _input_event(viewport, event, shape_idx):
+    if event is InputEventMouseButton:
+        if event.button_index == BUTTON_LEFT and event.pressed:
+            emit_signal("clicked", m_id)
 
 func id():
     return m_id
