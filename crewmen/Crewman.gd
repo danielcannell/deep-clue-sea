@@ -1,7 +1,8 @@
 extends Area2D
 
-# class member variables go here, for example:
+# Each crewman has a name, and is the traitor or not
 var crew_name = null
+var traitor = false
 
 
 func _ready():
