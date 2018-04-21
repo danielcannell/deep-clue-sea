@@ -22,7 +22,7 @@ func _process(delta):
     pass
 
 func room_clicked(id):
-    print("Clicked", id)
+    print("Clicked ", id, " ", room(id).centre_position())
 
 func room(room_id):
     match room_id:

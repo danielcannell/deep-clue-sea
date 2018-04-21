@@ -60,4 +60,4 @@ func flooding():
     return m_flooding
 
 func centre_position():
-    return Vector2()
+    return get_node("CollisionShape2D").shape.extents + position
