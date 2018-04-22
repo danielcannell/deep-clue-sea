@@ -115,12 +115,39 @@ func get_suspect_names():
         suspect_names.append(crew_names[id])
     return suspect_names
 
+func get_unenquired_suspects(crewman):
+    var suspects = []
+    for s in get_suspects():
+        if crewman.enquired_crew.find(s) < 0:
+            suspects.append(s)
+    return suspects
+
+func get_unenquired_suspect_names(crewman):
+    var crew_names = get_node("/root/Main/Submarine/CrewmenController").crewman_names
+    var suspect_names = []
+    for id in get_unenquired_suspects(crewman):
+        suspect_names.append(crew_names[id])
+    return suspect_names
+
 func get_potential_locations():
     return player_knowledge["potential_locs"]
 
 func get_potential_location_names():
     var pot_loc_names = []
     for id in get_potential_locations():
+        pot_loc_names.append(Globals.ROOM_NAMES[id])
+    return pot_loc_names
+
+func get_unenquired_potential_locations(crewman):
+    var locations = []
+    for l in get_potential_locations():
+        if crewman.enquired_rooms.find(l) < 0:
+            locations.append(l)
+    return locations
+
+func get_unenquired_potential_location_names(crewman):
+    var pot_loc_names = []
+    for id in get_unenquired_potential_locations(crewman):
         pot_loc_names.append(Globals.ROOM_NAMES[id])
     return pot_loc_names
 
@@ -179,16 +206,17 @@ func advance_dialog(choice):
             match choice:
                 0:
                     dialog_state = DialogState.CrewInterrogation
-                    hud.show_dialog("Accuse a person!", get_suspect_names())
+                    hud.show_dialog("Accuse a person!", get_unenquired_suspect_names(crewman))
                 1:
                     dialog_state = DialogState.RoomInterrogation
-                    hud.show_dialog("Accuse a room!", get_potential_location_names())
+                    hud.show_dialog("Accuse a room!", get_unenquired_potential_location_names(crewman))
                 2:
                     dialog_state = DialogState.None
                     end_dialog()
         DialogState.CrewInterrogation:
-            var suspects = get_suspects()
+            var suspects = get_unenquired_suspects(crewman)
             var chosen_suspect = suspects[choice]
+            crewman.enquired_crew.append(chosen_suspect)
             
             var msg = "I do not know this person"
             
@@ -201,8 +229,9 @@ func advance_dialog(choice):
             dialog_state = DialogState.Response
             hud.show_dialog(msg, ["Ask another question", "As you were"])
         DialogState.RoomInterrogation:
-            var locations = get_potential_locations()
+            var locations = get_unenquired_potential_locations(crewman)
             var chosen_location = locations[choice]
+            crewman.enquired_rooms.append(chosen_location)
             
             var msg = "I do not know this place"
             
@@ -223,7 +252,7 @@ func advance_dialog(choice):
                 1:
                     dialog_state = DialogState.None
                     end_dialog()
-                    
+
 
 func end_dialog():
     var hud = get_node("/root/Main/HUD")
