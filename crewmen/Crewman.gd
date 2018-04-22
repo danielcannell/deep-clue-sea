@@ -3,7 +3,7 @@ extends Area2D
 # Class consts all in globals as settings...
 
 # Useful enums and arrays
-enum crew_state {IDLE, MOVING, ACTING, TALKING, DEAD}
+enum crew_state {IDLE, MOVING, ACTING, TALKING, DEAD, DIALOG}
 enum room_action {PUMPING, HEALING}
 var active_rooms = [
     Globals.Rooms.MedBay,
@@ -149,6 +149,9 @@ func _process(delta):
 
     emit_signal("hitpoints_update", hitpoints)
 
+func is_alive():
+    return state != crew_state.DEAD
+
 func select():
     selected = true
     get_node("Line2D").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
@@ -157,3 +160,8 @@ func deselect():
     selected = false
     get_node("Line2D").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
 
+func start_dialog():
+    state = crew_state.DIALOG
+
+func end_dialog():
+    state = crew_state.IDLE

@@ -161,12 +161,14 @@ func advance_dialog(choice):
                 dialog_state = DialogState.BuggerOff
                 hud.show_dialog("Bugger Off!", ["As you were"])
             else:
+                crewman.start_dialog()
                 dialog_state = DialogState.Banter
                 hud.show_dialog("Banter!", ["A crewmate", "A room", "As you were"])
         DialogState.BuggerOff:
             match choice:
                 0:
                     dialog_state = DialogState.None
+                    crewman.end_dialog()
                     hud.hide_dialog()
         DialogState.Banter:
             match choice:
@@ -178,6 +180,7 @@ func advance_dialog(choice):
                     hud.show_dialog("Accuse a room!", get_potential_location_names())
                 2:
                     dialog_state = DialogState.None
+                    crewman.end_dialog()
                     hud.hide_dialog()
         DialogState.CrewInterrogation:
             var suspects = get_suspects()
@@ -211,4 +214,5 @@ func advance_dialog(choice):
                     hud.show_dialog("Bugger Off!", ["As you were"])
                 1:
                     dialog_state = DialogState.None
+                    crewman.end_dialog()
                     hud.hide_dialog()
