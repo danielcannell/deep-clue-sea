@@ -96,11 +96,10 @@ extents = Vector2( 96, 128 )
 
 [node name="Empty" type="Sprite" parent="." index="0"]
 
-editor/display_folded = true
 position = Vector2( -320, -384 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 256, 256 )
+region_rect = Rect2( 0, 256, 256, 256 )
 _sections_unfolded = [ "Region" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Empty" index="0"]
