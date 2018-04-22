@@ -43,7 +43,6 @@ func _process(delta):
             idle_time = 0.0
             # Get a vector towards destination
             var mov_vect = get_node("PathPlanner").get_path_vector(position, destination)
-
             # Length 0: We've arrived or path is blocked
             # See what there is to do where we are
             if mov_vect.length() == 0:
@@ -51,13 +50,13 @@ func _process(delta):
 
             # We're close to destination. Move the whole vector distance.
             elif mov_vect.length() <= (CREW_SPEED * delta):
-                self.position.x += mov_vect.x
-                self.position.y += mov_vect.y
+                position.x += mov_vect.x
+                position.y += mov_vect.y
 
             # Move the direction of the vector, as far as we can.
             else:
-                self.position.x += (mov_vect.normalized() * delta).x
-                self.position.y += (mov_vect.normalized() * delta).y
+                position.x += (mov_vect * delta).x
+                position.y += (mov_vect * delta).y
 
         # Handle the possible states of the current room
         crew_state.ACTING:
