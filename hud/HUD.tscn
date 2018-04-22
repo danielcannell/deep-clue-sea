@@ -1,15 +1,22 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
 
-[node name="CanvasLayer" type="CanvasLayer" index="0"]
+[ext_resource path="res://hud/HUD.gd" type="Script" id=1]
+[ext_resource path="res://hud/ChatPopup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://hud/LogPopup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hud/LogEntry.tscn" type="PackedScene" id=4]
+
+[node name="CanvasLayer" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+script = ExtResource( 1 )
 
 [node name="Controlbar" type="Node2D" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 0, 600 )
 _sections_unfolded = [ "Transform" ]
 
@@ -84,6 +91,7 @@ _sections_unfolded = [ "Material" ]
 
 [node name="Healthbar" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 168, 559 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
@@ -125,5 +133,26 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.0196533, 0.628906, 0, 1 )
 _sections_unfolded = [ "Rect" ]
+
+[node name="ChatWindow" parent="." index="2" instance=ExtResource( 2 )]
+
+visible = false
+margin_left = 212.0
+margin_top = 75.0
+margin_right = 812.0
+margin_bottom = 475.0
+
+[node name="LogWindow" parent="." index="3" instance=ExtResource( 3 )]
+
+visible = false
+margin_left = 212.0
+margin_top = 75.0
+margin_right = 812.0
+margin_bottom = 475.0
+logentry = ExtResource( 4 )
+
+[connection signal="pressed" from="Controlbar/LogButton" to="." method="_on_LogButton_pressed"]
+
+[connection signal="pressed" from="Controlbar/ChatButton" to="." method="_on_ChatButton_pressed"]
 
 
