@@ -100,7 +100,7 @@ func get_suspects():
     return player_knowledge["suspects"]
     
 func get_suspect_names():
-    var crew_names = get_node("/root/Main/Submarine/CrewmenController").crewmen_names
+    var crew_names = get_node("/root/Main/Submarine/CrewmenController").crewman_names
     var suspect_names = []
     for id in get_suspects():
         suspect_names.append(crew_names[id])
@@ -125,6 +125,12 @@ func is_potential_location(room_id):
         return true
     return false
 
+func crewman_clear_suspect(crew_id, suspect_id):
+    return crew_knowledge[crew_id]["people_knowledge"].has(suspect_id)
+
+func crewman_clear_location(crew_id, room_id):
+    return crew_knowledge[crew_id]["location_knowledge"].has(room_id)
+    
 #-- Dialog system ----------------------------------------------------------------
 
 func chat_button_pressed():
