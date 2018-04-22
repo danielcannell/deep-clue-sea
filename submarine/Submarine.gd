@@ -42,5 +42,11 @@ func room(room_id):
         Globals.Rooms.MiddleRightLadder: return get_node("TileMap/ladder")
         Globals.Rooms.LowerRightLadder:  return get_node("TileMap/ladder")
 
-func containing_room_id(posn):
-    pass
+func containing_room_id(pos):
+    for rm in Globals.ROOMS_LIST:
+        if room(rm).contains(pos):
+            return rm
+
+    for ld in Globals.LADDERS_LIST:
+        if room(ld).contains(pos):
+            return ld

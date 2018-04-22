@@ -29,3 +29,12 @@ const ROOMS_LIST = [
     Rooms.MedBay,
     Rooms.Bridge
 ]
+
+const LADDERS_LIST = [
+    Rooms.UpperLeftLadder,
+    Rooms.MiddleLeftLadder,
+    Rooms.LowerLeftLadder,
+    Rooms.UpperRightLadder,
+    Rooms.MiddleRightLadder,
+    Rooms.LowerRightLadder,
+]
