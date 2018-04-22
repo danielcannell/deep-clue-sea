@@ -27,8 +27,10 @@ func add_place(name, strike):
     get_node("Split/Places").add_child(l)
 
 func _on_LogWindow_about_to_show():
+    var d_root = get_node("/root/Main/DetectiveRoot")
+    var crew_name_list = get_node("/root/Main/Submarine/CrewmenController").crewman_names
     clear_names_and_places()
     for i in range(8):
-        add_name("Crewman " + str(i), i % 2)
+        add_name("Crewman " + crew_name_list[i], !d_root.is_suspect(i))
     for i in range(8):
-        add_place("Room " + str(i), (i+1) % 2)
+        add_place(Globals.ROOM_NAMES[i], !d_root.is_potential_location(i))

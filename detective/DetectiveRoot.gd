@@ -88,3 +88,13 @@ func get_suspects():
 
 func get_potential_locations():
     return player_knowledge["potential_locs"]
+
+func is_suspect(crew_id):
+    if player_knowledge["suspects"].has(crew_id):
+        return true
+    return false
+
+func is_potential_location(room_id):
+    if player_knowledge["potential_locs"].has(room_id):
+        return true
+    return false
