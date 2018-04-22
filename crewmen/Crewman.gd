@@ -1,11 +1,7 @@
 extends Area2D
 
-# Class consts
-const CREW_SPEED = 70
-const HEALING_RATE = 10
-const FIRE_DAMAGE_RATE = 20
-const DROWNING_DAMAGE_RATE = 10
-const FLOODED_MAX_SPEED = 0.25
+# Class consts all in globals as settings...
+
 # Useful enums and arrays
 enum crew_state {IDLE, MOVING, ACTING, TALKING, DEAD}
 enum room_action {PUMPING, HEALING}
@@ -19,8 +15,10 @@ signal clicked(c)
 # Each crewman has a name, and is the traitor or not
 var crew_name = null
 var traitor = false
-var hitpoints = 100
+var hitpoints = Globals.CREW_MAX_HITPOINTS
 var happiness = 1.0
+var room_knowledge = []
+var traitor_knowledge = []
 
 # Current state info
 var state = crew_state.IDLE
@@ -58,10 +56,10 @@ func _process(delta):
     
     # Update the current room
     current_room = sub.containing_room_id(position)
-    hitpoints -= (sub.room(current_room).fire() * FIRE_DAMAGE_RATE * delta)
+    hitpoints -= (sub.room(current_room).fire() * Globals.FIRE_DAMAGE_RATE * delta)
     if sub.room(current_room).flooding() > 0.7:
-        hitpoints -= DROWNING_DAMAGE_RATE * delta
-    var current_speed = ((1 - sub.room(current_room).flooding() * FLOODED_MAX_SPEED) * CREW_SPEED)
+        hitpoints -= Globals.DROWNING_DAMAGE_RATE * delta
+    var current_speed = ((1 - sub.room(current_room).flooding() * Globals.FLOODED_MAX_SPEED) * Globals.CREW_SPEED)
     
     if hitpoints <= 0:
         state = crew_state.DEAD
@@ -113,7 +111,7 @@ func _process(delta):
             # Heal if necessary
             elif current_room == Globals.Rooms.MedBay:
                 if hitpoints < 100:
-                    hitpoints += HEALING_RATE * delta
+                    hitpoints += Globals.HEALING_RATE * delta
                     if hitpoints > 100:
                         hitpoints = 100
                         state = crew_state.IDLE
@@ -125,8 +123,8 @@ func _process(delta):
                 state = crew_state.IDLE
 
         crew_state.IDLE:
-            # Go to MedBay if injured
-            if hitpoints < 100:
+            # Go to MedBay if badly injured
+            if hitpoints < 50:
                 idle_time = 0.0
                 destination = get_random_pos_in_room(sub.room(Globals.Rooms.MedBay))
                 state = crew_state.MOVING

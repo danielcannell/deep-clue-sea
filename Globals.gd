@@ -49,3 +49,14 @@ const LADDERS_LIST = [
     Rooms.MiddleRightLadder,
     Rooms.LowerRightLadder,
 ]
+
+const ROOM_KNOWLEDGE_COUNT = 2
+const TRAITOR_KNOWLEDGE_COUNT = 2
+
+# Crewman settings
+const CREW_SPEED = 200
+const HEALING_RATE = 10
+const FIRE_DAMAGE_RATE = 20
+const DROWNING_DAMAGE_RATE = 10
+const FLOODED_MAX_SPEED = 0.25
+const CREW_MAX_HITPOINTS = 100
