@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://crewmen/Crewman.gd" type="Script" id=1]
 [ext_resource path="res://External Resources/Images/sailor.png" type="Texture" id=2]
+[ext_resource path="res://pathplanner.gd" type="Script" id=3]
+
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -18,7 +20,7 @@ custom_solver_bias = 0.0
 radius = 65.0
 height = 250.0
 
-[node name="Crewman" type="Area2D"]
+[node name="Crewman" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -42,5 +44,9 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( -2.5, -2 )
 scale = Vector2( 0.977941, 1 )
 shape = SubResource( 2 )
+
+[node name="PathPlanner" type="Node" parent="." index="2"]
+
+script = ExtResource( 3 )
 
 

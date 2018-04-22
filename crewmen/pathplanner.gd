@@ -45,7 +45,7 @@ class PathResult:
     var dist = INF
 
 func _ready():
-    submarine = get_node("../Submarine")
+    submarine = get_node("/root/Main/Submarine")
     Rooms = Globals.Rooms
     roommapping = {
         Rooms.EngineRoom: 0,
@@ -66,9 +66,6 @@ func _ready():
         Rooms.LowerRightLadder: 12,
     }
 
-    var r = submarine.room(Rooms.EngineRoom)
-    var cpos = r.centre_position()
-    print(get_path_vector(cpos, Rooms.Bridge))
 
 func get_length(u, v):
     var room = submarine.room(v)

@@ -42,7 +42,7 @@ func _process(delta):
         crew_state.MOVING:
             idle_time = 0.0
             # Get a vector towards destination
-            var mov_vect = path_to_room(destination)
+            var mov_vect = get_node("PathPlanner").get_path_vector(position, destination)
 
             # Length 0: We've arrived or path is blocked
             # See what there is to do where we are
