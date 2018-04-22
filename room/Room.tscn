@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://room/Room.gd" type="Script" id=1]
+[ext_resource path="res://submarine/fire.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -22,6 +23,44 @@ _sections_unfolded = [ "Transform" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
+
+[node name="Fire" type="Node2D" parent="." index="1"]
+
+position = Vector2( 0, 256 )
+z_index = 99
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="fire" type="Sprite" parent="Fire" index="0"]
+
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -450, -1280 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Flood" type="Node2D" parent="." index="2"]
+
+position = Vector2( 0, 256 )
+z_index = 99
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="ColorRect" type="ColorRect" parent="Flood" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -512.0
+margin_right = 512.0
+margin_bottom = -64.0
+rect_pivot_offset = Vector2( 20, 20 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0.367188, 1, 0.392274 )
+_sections_unfolded = [ "Anchor", "Rect" ]
 
 

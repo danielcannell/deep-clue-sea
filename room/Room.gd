@@ -17,9 +17,19 @@ func _ready():
 
 func _process(delta):
     if m_fire > 0.0:
-        m_fire += BURN_RATE
+        m_fire = min(m_fire + BURN_RATE * delta, 1)
     if m_flooding > 0.0:
-        m_flooding += FLOOD_RATE
+        m_flooding = min(m_flooding + FLOOD_RATE * delta, 1)
+
+    var fire_scale = 0
+    if m_fire > 0.0:
+        fire_scale = 0.3 + (m_fire * 0.7)
+    get_node("Fire").set_scale(Vector2(fire_scale, fire_scale))
+
+    var flood_scale = 0
+    if m_flooding > 0.0:
+        flood_scale = 0.1 + (m_flooding * 0.9)
+    get_node("Flood").set_scale(Vector2(1, flood_scale))
 
 func _input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton:

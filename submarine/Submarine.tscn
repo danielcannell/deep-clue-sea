@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://submarine/Submarine.gd" type="Script" id=1]
 [ext_resource path="res://submarine/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://submarine/ladder.gd" type="Script" id=3]
 [ext_resource path="res://room/Room.tscn" type="PackedScene" id=4]
+[ext_resource path="res://submarine/environment/Environment.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -15,7 +16,7 @@ extents = Vector2( 100, 1000 )
 custom_solver_bias = 0.0
 extents = Vector2( 100, 1000 )
 
-[node name="Submarine" type="Node2D" index="0"]
+[node name="Submarine" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -43,6 +44,7 @@ _sections_unfolded = [ "Cell", "Collision", "Transform" ]
 
 [node name="ladder" type="Area2D" parent="TileMap" index="0"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -94,5 +96,9 @@ position = Vector2( 2048, 2304 )
 [node name="Bridge" parent="TileMap" index="8" instance=ExtResource( 4 )]
 
 position = Vector2( 4352, 1536 )
+
+[node name="Environment" type="Node" parent="." index="1"]
+
+script = ExtResource( 5 )
 
 
