@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal chat_button_pressed
+signal chat_option_selected
 
 func _on_Submarine_hitpoints_update(hp):
     get_node("Healthbar/Green").set_scale(Vector2(hp / 100.0, 1))
@@ -17,3 +18,6 @@ func show_dialog(text, list_of_choices):
     cw.prompt_text = "Ask about..."
     cw.options = list_of_choices
     cw.popup()
+
+func _on_ChatWindow_option_selected(id):
+    emit_signal("chat_option_selected", id)
