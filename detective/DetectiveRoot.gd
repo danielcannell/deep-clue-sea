@@ -158,12 +158,13 @@ func advance_dialog(choice):
 
     match dialog_state:
         DialogState.None:
+            crewman.start_dialog()
+            player.start_dialog()
+
             if current_time < crewman.last_dialog_time + Globals.BUGGER_OFF_TIME:
                 dialog_state = DialogState.BuggerOff
                 hud.show_dialog("Bugger Off!", ["As you were"])
             else:
-                crewman.start_dialog()
-                player.start_dialog()
                 dialog_state = DialogState.Banter
                 hud.show_dialog("Banter!", ["A crewmate", "A room", "As you were"])
         DialogState.BuggerOff:
