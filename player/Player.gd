@@ -16,18 +16,12 @@ var velocity = Vector2()
 var on_air_time = 100
 var jumping = false
 
-var is_on_ladder = false
+var is_on_ladder = 0
 
 func _ready():
     # Called every time the node is added to the scene.
     # Initialization here
     pass
-
-func _enter_ladder():
-    is_on_ladder = true
-
-func _exit_ladder():
-    is_on_ladder = false
 
 func _physics_process(delta):
     # Create forces
@@ -78,9 +72,9 @@ func _physics_process(delta):
 func _on_Area2D_area_entered(area):
     if area.get_name() == "ladder":
         print("Ladder!")
-        is_on_ladder = true
+        is_on_ladder += 1
 
 func _on_Area2D_area_exited(area):
     if area.get_name() == "ladder":
         print("No Ladder!")
-        is_on_ladder = false
+        is_on_ladder -= 1

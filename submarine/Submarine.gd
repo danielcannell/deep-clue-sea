@@ -35,12 +35,12 @@ func room(room_id):
         Globals.Rooms.MedBay:            return get_node("TileMap/MedBay")
         Globals.Rooms.Bridge:            return get_node("TileMap/Bridge")
 
-        Globals.Rooms.UpperLeftLadder:   return get_node("TileMap/ladder")
-        Globals.Rooms.MiddleLeftLadder:  return get_node("TileMap/ladder")
-        Globals.Rooms.LowerLeftLadder:   return get_node("TileMap/ladder")
-        Globals.Rooms.UpperRightLadder:  return get_node("TileMap/ladder")
-        Globals.Rooms.MiddleRightLadder: return get_node("TileMap/ladder")
-        Globals.Rooms.LowerRightLadder:  return get_node("TileMap/ladder")
+        Globals.Rooms.UpperLeftLadder:   return get_node("TileMap/UpperLeftLadder")
+        Globals.Rooms.MiddleLeftLadder:  return get_node("TileMap/MiddleLeftLadder")
+        Globals.Rooms.LowerLeftLadder:   return get_node("TileMap/LowerLeftLadder")
+        Globals.Rooms.UpperRightLadder:  return get_node("TileMap/UpperRightLadder")
+        Globals.Rooms.MiddleRightLadder: return get_node("TileMap/MiddleRightLadder")
+        Globals.Rooms.LowerRightLadder:  return get_node("TileMap/LowerRightLadder")
 
 func containing_room_id(pos):
     for rm in Globals.ROOMS_LIST:
