@@ -27,6 +27,9 @@ var destination = null
 var idle_time = 0.0
 var last_dialog_time = -INF
 
+var enquired_crew = []
+var enquired_rooms = []
+
 var sub = null
 
 var selected = false

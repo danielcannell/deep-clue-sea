@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sub_noise.ogg-6089c8f918670135825c4f7f1d3a0643.oggstr"
+
+[deps]
+
+source_file="res://External Resources/Music/sub_noise.ogg"
+source_md5="9cd9b299db471a3aa456de92706a0b57"
+
+dest_files=[ "res://.import/sub_noise.ogg-6089c8f918670135825c4f7f1d3a0643.oggstr" ]
+dest_md5="5c68ed5bb6f08169e0c309b5adf8a244"
+
+[params]
+
+loop=true
+loop_offset=0

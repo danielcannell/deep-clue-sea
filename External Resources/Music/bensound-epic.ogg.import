@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bensound-epic.ogg-0d2123d1d208007352309944db1fdfcc.oggstr"
+
+[deps]
+
+source_file="res://External Resources/Music/bensound-epic.ogg"
+source_md5="3f1ff3107d27684325ea3bf2d3b6cbbc"
+
+dest_files=[ "res://.import/bensound-epic.ogg-0d2123d1d208007352309944db1fdfcc.oggstr" ]
+dest_md5="d344b810f0c70b26c84831e55f6bf857"
+
+[params]
+
+loop=true
+loop_offset=0
