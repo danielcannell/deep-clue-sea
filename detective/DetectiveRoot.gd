@@ -1,5 +1,7 @@
 extends Node
 
+signal case_closed
+
 var RoomSolText = {
     Globals.Rooms.EngineRoom: "",
     Globals.Rooms.Instrumentation: "",
@@ -19,16 +21,13 @@ enum DialogState {
     Response,
 }
 
+var current_time = 0
 var dialog_state = DialogState.None
-var bugger_off_timer = Timer.new()
 var interrogatee = null
 
 var solution = {"location":null, "traitor":null}
 var crew_knowledge = []
 var player_knowledge = {"suspects":[], "potential_locs": []}
-
-func _init():
-    bugger_off_timer.set_wait_time(Globals.BUGGER_OFF_TIME)
 
 func _ready():
     # Register for chat button clicks
@@ -38,6 +37,9 @@ func _ready():
 
     initialise_case()
     initialise_player_knowledge()
+
+func _process(delta):
+    current_time += delta
 
 func initialise_player_knowledge():
     var num_crew = get_node("/root/Main/Submarine/CrewmenController").crewmen.size()
@@ -150,16 +152,16 @@ func chat_button_pressed():
 
 func advance_dialog(choice):
     var hud = get_node("/root/Main/HUD")
+    var crewmen_controller = get_node("/root/Main/Submarine/CrewmenController")
+    var crewman = crewmen_controller.crewmen[interrogatee]
 
     match dialog_state:
         DialogState.None:
-            #if not bugger_off_timer.is_stopped() and bugger_off_timer.time_left > 0:
-            if false:
+            if current_time < crewman.last_dialog_time + Globals.BUGGER_OFF_TIME:
                 dialog_state = DialogState.BuggerOff
                 hud.show_dialog("Bugger Off!", ["As you were"])
             else:
                 dialog_state = DialogState.Banter
-                bugger_off_timer.start()
                 hud.show_dialog("Banter!", ["A crewmate", "A room", "As you were"])
         DialogState.BuggerOff:
             match choice:
@@ -202,6 +204,7 @@ func advance_dialog(choice):
             dialog_state = DialogState.Response
             hud.show_dialog(msg, ["Ask another question", "As you were"])
         DialogState.Response:
+            crewman.last_dialog_time = current_time
             match choice:
                 0:
                     dialog_state = DialogState.BuggerOff

@@ -25,6 +25,7 @@ var state = crew_state.IDLE
 var current_room = null
 var destination = null
 var idle_time = 0.0
+var last_dialog_time = -INF
 
 var sub = null
 
