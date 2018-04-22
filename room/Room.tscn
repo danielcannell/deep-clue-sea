@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 512, 256 )
 
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -56,11 +56,11 @@ margin_right = 512.0
 margin_bottom = -64.0
 rect_pivot_offset = Vector2( 20, 20 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0.367188, 1, 0.392274 )
-_sections_unfolded = [ "Anchor", "Rect" ]
+_sections_unfolded = [ "Anchor", "Mouse", "Rect" ]
 
 
