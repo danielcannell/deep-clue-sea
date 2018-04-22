@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://crewmen/Crewman.gd" type="Script" id=1]
 [ext_resource path="res://External Resources/Images/sailor.png" type="Texture" id=2]
 [ext_resource path="res://crewmen/pathplanner.gd" type="Script" id=3]
+[ext_resource path="res://crewmen/Healthbar.gd" type="Script" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -19,7 +20,7 @@ custom_solver_bias = 0.0
 radius = 65.0
 height = 250.0
 
-[node name="Crewman" type="Area2D"]
+[node name="Crewman" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -58,5 +59,52 @@ default_color = Color( 0.101563, 1, 0, 1 )
 texture_mode = 1
 sharp_limit = 2.0
 round_precision = 8
+
+[node name="Healthbar" type="Node2D" parent="." index="4"]
+
+position = Vector2( 0, -385 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Red" type="ColorRect" parent="Healthbar" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -75.0
+margin_right = 75.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 0, 0, 1 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="Green" type="ColorRect" parent="Healthbar" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -75.0
+margin_right = 75.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0196533, 0.628906, 0, 1 )
+_sections_unfolded = [ "Rect" ]
+
+[connection signal="hitpoints_update" from="." to="Healthbar" method="_on_Crewman_hitpoints_update"]
 
 

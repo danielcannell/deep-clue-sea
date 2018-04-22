@@ -2,6 +2,7 @@ extends Node
 
 var Rooms = null
 var roommapping = null
+var roomunmapping = null
 const roomgraph = [
     # Left room
     [2],
@@ -65,10 +66,32 @@ func _ready():
         Rooms.MiddleRightLadder: 11,
         Rooms.LowerRightLadder: 12,
     }
+    roomunmapping = {
+        0: Rooms.EngineRoom,
+        1: Rooms.UpperLeftLadder,
+        2: Rooms.MiddleLeftLadder,
+        3: Rooms.LowerLeftLadder,
+        4: Rooms.LifeSupport,
+        5: Rooms.Instrumentation,
+        6: Rooms.PumpRoom,
+        7: Rooms.WeaponControl,
+        8: Rooms.MedBay,
+        9: Rooms.TorpedoBay,
+        10: Rooms.UpperRightLadder,
+        11: Rooms.MiddleRightLadder,
+        12: Rooms.LowerRightLadder,
+        13: Rooms.Bridge,
+    }
 
+func get_room_from_graph(gid):
+    var rid = roomunmapping[gid]
+    return submarine.room(rid)
+
+func get_graph_from_room_id(rid):
+    return roommapping[rid]
 
 func get_length(u, v):
-    var room = submarine.room(v)
+    var room = get_room_from_graph(v)
     var fire = room.fire()
     var flooding = room.flooding()
     var cost = 0
@@ -77,12 +100,12 @@ func get_length(u, v):
     elif flooding > 0.0:
         cost = 5 * flooding
     elif fire > 0.0:
-        cost = 10
+        cost = 30
     return 1 + cost
 
-func dijkstra(graph, sn, en):
-    var s = roommapping[sn]
-    var e = roommapping[en]
+func dijkstra(graph, start_room, end_room):
+    var s = get_graph_from_room_id(start_room)
+    var e = get_graph_from_room_id(end_room)
 
     var numnodes = graph.size()
     var nodes = []
@@ -136,10 +159,10 @@ func dijkstra(graph, sn, en):
 # endpos: Vector2D
 func get_path_vector(pos, endpos):
     # Get room ids
-    var sn = submarine.containing_room_id(pos)
-    var en = submarine.containing_room_id(endpos)
+    var start_room_id = submarine.containing_room_id(pos)
+    var end_room_id = submarine.containing_room_id(endpos)
     # Run shortest-path algorithm on graph
-    var pr = dijkstra(roomgraph, sn, en)
+    var pr = dijkstra(roomgraph, start_room_id, end_room_id)
 
     # If there is no path, return 0
     if pr.dist == INF:
@@ -148,20 +171,12 @@ func get_path_vector(pos, endpos):
     var path = pr.path
 
     # If we're in the goal room, return a vector to the room center
-    if roommapping[en] == path[0]:
+    if get_graph_from_room_id(end_room_id) == path[0]:
         return endpos - pos
 
     # Work out which direction we should head in
-    var path_0 = null
-    var path_1 = null
-    for rm in roommapping.keys():
-        if roommapping[rm] == path[0]:
-            path_0 = rm
-        elif roommapping[rm] == path[1]:
-            path_1 = rm
-
-    var next_room_pos = submarine.room(path_1).centre_position()
-    var current_room_pos = submarine.room(path_0).centre_position()
+    var next_room_pos = get_room_from_graph(path[1]).centre_position()
+    var current_room_pos = get_room_from_graph(path[0]).centre_position()
     # Direction from current pos to current room center
     var offset_from_current = current_room_pos - pos
     # Direction from current room center to next room center

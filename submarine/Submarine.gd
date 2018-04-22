@@ -1,5 +1,12 @@
 extends Node2D
 
+const BURN_DAMAGE = 0.5
+
+var hitpoints = 100
+
+signal dead
+signal hitpoints_update
+
 func _init():
     pass
 
@@ -17,9 +24,17 @@ func _ready():
         room(rm).connect("clicked", self, "room_clicked")
 
 func _process(delta):
-    # Called every frame. Delta is time since last frame.
-    # Update game logic here.
-    pass
+    if hitpoints > 0.0:
+        # Environmental damage from fires
+        for roomid in Globals.ROOMS_LIST:
+            var r = room(roomid)
+            if r.fire() > 0.0:
+                hitpoints -= BURN_DAMAGE * delta
+
+        emit_signal("hitpoints_update", hitpoints)
+
+        if hitpoints <= 0:
+            emit_signal("dead")
 
 func room_clicked(id):
     print("Clicked ", id, " ", room(id).centre_position())

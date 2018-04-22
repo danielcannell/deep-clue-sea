@@ -30,6 +30,8 @@ var idle_time = 0.0
 
 var selected = false
 
+signal hitpoints_update
+
 func _input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton:
         if event.button_index == BUTTON_LEFT and event.pressed:
@@ -133,6 +135,8 @@ func _process(delta):
 
         crew_state.DEAD:
             hitpoints = 0
+
+    emit_signal("hitpoints_update", hitpoints)
 
 func select():
     selected = true
