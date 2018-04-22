@@ -8,9 +8,83 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Healthbar" type="Node2D" parent="." index="0"]
+[node name="Controlbar" type="Node2D" parent="." index="0"]
 
-position = Vector2( 852.749, 30.8964 )
+position = Vector2( 0, 600 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Background" type="ColorRect" parent="Controlbar" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = -50.0
+margin_right = 1024.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.730469, 0.591143, 0.373795, 1 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="LogButton" type="Button" parent="Controlbar" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 870.0
+margin_top = -48.0
+margin_right = 1021.0
+margin_bottom = -2.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Captain's Log"
+flat = false
+align = 1
+_sections_unfolded = [ "Material" ]
+
+[node name="ChatButton" type="Button" parent="Controlbar" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 712.0
+margin_top = -48.0
+margin_right = 863.0
+margin_bottom = -2.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Interrogate"
+flat = false
+align = 1
+_sections_unfolded = [ "Material" ]
+
+[node name="Healthbar" type="Node2D" parent="." index="1"]
+
+position = Vector2( 168, 559 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
