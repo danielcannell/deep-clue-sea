@@ -17,7 +17,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = true
 collision_layer = 1
@@ -28,6 +28,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 0, -26 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )

@@ -10,7 +10,7 @@
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://submarine/environment/Environment.gd" type="Script" id=9]
 
-[node name="Submarine" type="Node2D" index="0"]
+[node name="Submarine" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -142,7 +142,7 @@ position = Vector2( 420, 188 )
 
 [node name="Player" parent="." index="3" instance=ExtResource( 8 )]
 
-position = Vector2( 346, 326 )
+position = Vector2( 344, 324 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Environment" type="Node" parent="." index="4"]

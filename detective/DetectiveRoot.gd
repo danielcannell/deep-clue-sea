@@ -16,18 +16,25 @@ enum DialogState {
     Banter,
     CrewInterrogation,
     RoomInterrogation,
+    Response,
 }
 
 var dialog_state = DialogState.None
+var bugger_off_timer = Timer.new()
+var interrogatee = null
 
 var solution = {"location":null, "traitor":null}
 var crew_knowledge = []
 var player_knowledge = {"suspects":[], "potential_locs": []}
 
+func _init():
+    bugger_off_timer.set_wait_time(Globals.BUGGER_OFF_TIME)
+
 func _ready():
     # Register for chat button clicks
     var hud = get_node("/root/Main/HUD")
     hud.connect("chat_button_pressed", self, "chat_button_pressed")
+    hud.connect("chat_option_selected", self, "advance_dialog")
 
     initialise_case()
     initialise_player_knowledge()
@@ -129,7 +136,7 @@ func crewman_clear_suspect(crew_id, suspect_id):
     return crew_knowledge[crew_id]["people_knowledge"].has(suspect_id)
 
 func crewman_clear_location(crew_id, room_id):
-    return crew_knowledge[crew_id]["location_knowledge"].has(room_id)
+    return crew_knowledge[crew_id]["room_knowledge"].has(room_id)
     
 #-- Dialog system ----------------------------------------------------------------
 
@@ -138,6 +145,7 @@ func chat_button_pressed():
     var player = get_node("/root/Main/Submarine/Player")
 
     if crewmen_controller.can_interact(player.position):
+        interrogatee = crewmen_controller.selected_crewman_id()
         advance_dialog(-1)
 
 func advance_dialog(choice):
@@ -145,17 +153,59 @@ func advance_dialog(choice):
 
     match dialog_state:
         DialogState.None:
-            dialog_state = DialogState.Banter
-            hud.show_dialog("Banter!", ["A crewmate", "A room"])
+            #if not bugger_off_timer.is_stopped() and bugger_off_timer.time_left > 0:
+            if false:
+                dialog_state = DialogState.BuggerOff
+                hud.show_dialog("Bugger Off!", ["As you were"])
+            else:
+                dialog_state = DialogState.Banter
+                bugger_off_timer.start()
+                hud.show_dialog("Banter!", ["A crewmate", "A room", "As you were"])
+        DialogState.BuggerOff:
+            match choice:
+                0:
+                    dialog_state = DialogState.None
+                    hud.hide_dialog()
         DialogState.Banter:
             match choice:
                 0:
                     dialog_state = DialogState.CrewInterrogation
-                    hud.show_dialog("Accuse a person!", ["Alice", "Bob", "Carol"])
+                    hud.show_dialog("Accuse a person!", get_suspect_names())
                 1:
                     dialog_state = DialogState.RoomInterrogation
-                    hud.show_dialog("Accuse a room!", ["Kitchen", "Ballroom", "Conservatory"])
+                    hud.show_dialog("Accuse a room!", get_potential_location_names())
+                2:
+                    dialog_state = DialogState.None
+                    hud.hide_dialog()
         DialogState.CrewInterrogation:
-            hud.show_dialog("I do not know this person", ["Ask another question", "As you were"])
+            var suspects = get_suspects()
+            var chosen_suspect = suspects[choice]
+            
+            var msg = "I do not know this person"
+            
+            if crewman_clear_suspect(interrogatee, chosen_suspect):
+                msg = "I know it wasn't him!"
+                rule_out_person(chosen_suspect)
+
+            dialog_state = DialogState.Response
+            hud.show_dialog(msg, ["Ask another question", "As you were"])
         DialogState.RoomInterrogation:
-            hud.show_dialog("I do not know this room", ["Ask another question", "As you were"])
+            var locations = get_potential_locations()
+            var chosen_location = locations[choice]
+            
+            var msg = "I do not know this place"
+            
+            if crewman_clear_location(interrogatee, chosen_location):
+                msg = "I know it didn't happen there!"
+                rule_out_location(chosen_location)
+
+            dialog_state = DialogState.Response
+            hud.show_dialog(msg, ["Ask another question", "As you were"])
+        DialogState.Response:
+            match choice:
+                0:
+                    dialog_state = DialogState.BuggerOff
+                    hud.show_dialog("Bugger Off!", ["As you were"])
+                1:
+                    dialog_state = DialogState.None
+                    hud.hide_dialog()

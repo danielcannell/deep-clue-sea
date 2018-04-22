@@ -49,3 +49,6 @@ func can_interact(player_pos):
     if selected_crewman:
         return player_pos.distance_to(selected_crewman.position + position) < Globals.INTERACTRION_DISTANCE
     return false
+    
+func selected_crewman_id():
+    return crewmen.find(selected_crewman)

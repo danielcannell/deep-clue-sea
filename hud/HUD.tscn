@@ -136,11 +136,10 @@ _sections_unfolded = [ "Rect" ]
 
 [node name="ChatWindow" parent="." index="2" instance=ExtResource( 2 )]
 
-visible = false
 margin_left = 270.0
-margin_top = 145.0
+margin_top = 91.0
 margin_right = 754.0
-margin_bottom = 405.0
+margin_bottom = 459.0
 _sections_unfolded = [ "Popup", "Rect", "Visibility" ]
 
 [node name="LogWindow" parent="." index="3" instance=ExtResource( 3 )]
