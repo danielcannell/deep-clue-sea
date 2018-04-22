@@ -30,7 +30,7 @@ mix_target = 0
 bus = "Master"
 script = ExtResource( 6 )
 
-[connection signal="dead" from="Submarine" to="Submarine" method="_on_Submarine_dead"]
+[connection signal="dead" from="Submarine" to="." method="_on_Submarine_dead"]
 
 [connection signal="hitpoints_update" from="Submarine" to="HUD" method="_on_Submarine_hitpoints_update"]
 
