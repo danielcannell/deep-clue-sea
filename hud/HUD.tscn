@@ -156,4 +156,6 @@ logentry = ExtResource( 4 )
 
 [connection signal="pressed" from="Controlbar/ChatButton" to="." method="_on_ChatButton_pressed"]
 
+[connection signal="option_selected" from="ChatWindow" to="." method="_on_ChatWindow_option_selected"]
+
 
