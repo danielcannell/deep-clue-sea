@@ -10,15 +10,29 @@ var RoomSolText = {
     Globals.Rooms.Bridge: ""
 }
 
+enum DialogState {
+    None,
+    BuggerOff,
+    Banter,
+    CrewInterrogation,
+    RoomInterrogation,
+}
+
+var dialog_state = DialogState.None
+
 var solution = {"location":null, "traitor":null}
 var crew_knowledge = []
 
 var player_knowledge = {"suspects":[], "potential_locs": []}
 
 func _ready():
+    # Register for chat button clicks
+    var hud = get_node("/root/Main/HUD")
+    hud.connect("chat_button_pressed", self, "chat_button_pressed")
+
     initialise_case()
     initialise_player_knowledge()
-    
+
 func initialise_player_knowledge():
     var num_crew = get_node("/root/Main/Submarine/CrewmenController").crewmen.size()
     for i in range(num_crew):
@@ -31,12 +45,12 @@ func initialise_case():
     var num_crew = get_node("/root/Main/Submarine/CrewmenController").crewmen.size()
     for i in range(num_crew):
         crew_knowledge.append({"room_knowledge": [], "people_knowledge": []})
-    
+
     # Randomly select a room to be the correct solution
     solution["location"] = Globals.ROOMS_LIST[randi() % 8]
     var not_solution_rooms_list = Globals.ROOMS_LIST.duplicate()
     not_solution_rooms_list.erase(solution["location"])
-    
+
     # Randomly select a traitor from list
     solution["traitor"] = randi() % num_crew
     var not_solution_crew_list = []
@@ -50,12 +64,12 @@ func initialise_case():
     for i in range(not_guilty_crew):
         for j in range(Globals.TRAITOR_KNOWLEDGE_COUNT - 1):
             not_solution_crew_list.append(not_solution_crew_list[i])
-    
+
     var not_solution_rooms = not_solution_rooms_list.size()
     for i in range(not_solution_rooms):
         for j in range(Globals.ROOM_KNOWLEDGE_COUNT - 1):
             not_solution_rooms_list.append(not_solution_rooms_list[i])
-    
+
     # Pass knowledge around until all is distributed
     not_solution_rooms = not_solution_rooms_list.size()
     not_guilty_crew = not_solution_crew_list.size()
@@ -66,7 +80,7 @@ func initialise_case():
         crew_knowledge[crew]["room_knowledge"].append(not_solution_rooms_list[knl_item])
         not_solution_rooms_list.remove(knl_item)
         i += 1
-    
+
     for traitor_knl in range(not_guilty_crew):
         var crew = i % num_crew
         var knl_item = randi() % not_solution_crew_list.size()
@@ -88,3 +102,32 @@ func get_suspects():
 
 func get_potential_locations():
     return player_knowledge["potential_locs"]
+
+#-- Dialog system ----------------------------------------------------------------
+
+func chat_button_pressed():
+    var crewmen_controller = get_node("/root/Main/Submarine/CrewmenController")
+    var player = get_node("/root/Main/Submarine/Player")
+
+    if crewmen_controller.can_interact(player.position):
+        advance_dialog(-1)
+
+func advance_dialog(choice):
+    var hud = get_node("/root/Main/HUD")
+
+    match dialog_state:
+        DialogState.None:
+            dialog_state = DialogState.Banter
+            hud.show_dialog("Banter!", ["A crewmate", "A room"])
+        DialogState.Banter:
+            match choice:
+                0:
+                    dialog_state = DialogState.CrewInterrogation
+                    hud.show_dialog("Accuse a person!", ["Alice", "Bob", "Carol"])
+                1:
+                    dialog_state = DialogState.RoomInterrogation
+                    hud.show_dialog("Accuse a room!", ["Kitchen", "Ballroom", "Conservatory"])
+        DialogState.CrewInterrogation:
+            hud.show_dialog("I do not know this person", ["Ask another question", "As you were"])
+        DialogState.RoomInterrogation:
+            hud.show_dialog("I do not know this room", ["Ask another question", "As you were"])
