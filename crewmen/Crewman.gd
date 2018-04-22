@@ -55,8 +55,8 @@ func _process(delta):
 
             # Move the direction of the vector, as far as we can.
             else:
-                position.x += (mov_vect * delta).x
-                position.y += (mov_vect * delta).y
+                position.x += (mov_vect.normalized() * CREW_SPEED * delta).x
+                position.y += (mov_vect.normalized() * CREW_SPEED * delta).y
 
         # Handle the possible states of the current room
         crew_state.ACTING:
