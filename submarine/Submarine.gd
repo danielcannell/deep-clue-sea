@@ -57,3 +57,4 @@ func containing_room_id(pos):
     for ld in Globals.LADDERS_LIST:
         if room(ld).contains(pos):
             return ld
+

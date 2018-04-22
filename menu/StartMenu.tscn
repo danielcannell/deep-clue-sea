@@ -12,7 +12,7 @@
 [ext_resource path="res://External Resources/Music/sub_noise.ogg" type="AudioStream" id=10]
 [ext_resource path="res://menu/SubEngineNoise.gd" type="Script" id=11]
 
-[node name="Container" type="Container" index="0"]
+[node name="Container" type="Container"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -138,5 +138,9 @@ mix_target = 0
 bus = "Master"
 script = ExtResource( 11 )
 _sections_unfolded = [ "Pause" ]
+
+[connection signal="pressed" from="ExitText" to="ExitText" method="_on_ExitText_pressed"]
+
+[connection signal="pressed" from="StartText" to="StartText" method="_on_StartText_pressed"]
 
 
