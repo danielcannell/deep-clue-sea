@@ -3,9 +3,11 @@ extends Area2D
 # Class consts
 const CREW_SPEED = 200
 const HEALING_RATE = 10
-
+const FIRE_DAMAGE_RATE = 20
+const DROWNING_DAMAGE_RATE = 10
+const FLOODED_MAX_SPEED = 0.25
 # Useful enums and arrays
-enum crew_state {IDLE, MOVING, ACTING, TALKING}
+enum crew_state {IDLE, MOVING, ACTING, TALKING, DEAD}
 enum room_action {PUMPING, HEALING}
 var active_rooms = [
     Globals.Rooms.MedBay,
@@ -45,9 +47,17 @@ func _process(delta):
     
     # Update the current room
     current_room = sub.containing_room_id(position)
+    hitpoints -= (sub.room(current_room).fire() * FIRE_DAMAGE_RATE * delta)
+    if sub.room(current_room).flooding() > 0.7:
+        hitpoints -= DROWNING_DAMAGE_RATE * delta
+    var current_speed = ((1 - sub.room(current_room).flooding() * FLOODED_MAX_SPEED) * CREW_SPEED)
+    
+    if hitpoints <= 0:
+        state = crew_state.DEAD
     
     # Act based on current state
     match state:
+        
         crew_state.MOVING:
             idle_time = 0.0
             # Get a vector towards destination
@@ -58,14 +68,14 @@ func _process(delta):
                 state = crew_state.ACTING
 
             # We're close to destination. Move the whole vector distance.
-            elif mov_vect.length() <= (CREW_SPEED * delta):
+            elif mov_vect.length() <= (current_speed * delta):
                 position.x += mov_vect.x
                 position.y += mov_vect.y
 
             # Move the direction of the vector, as far as we can.
             else:
-                position.x += (mov_vect.normalized() * CREW_SPEED * delta).x
-                position.y += (mov_vect.normalized() * CREW_SPEED * delta).y
+                position.x += (mov_vect.normalized() * current_speed * delta).x
+                position.y += (mov_vect.normalized() * current_speed * delta).y
 
         # Handle the possible states of the current room
         crew_state.ACTING:
@@ -107,7 +117,7 @@ func _process(delta):
             # Go to MedBay if injured
             if hitpoints < 100:
                 idle_time = 0.0
-                destination = get_random_pos_in_room(sub.room(Globals.Rooms.Medbay))
+                destination = get_random_pos_in_room(sub.room(Globals.Rooms.MedBay))
                 state = crew_state.MOVING
             
             # Otherwise, wait for a random short time, then go to random room
@@ -121,6 +131,9 @@ func _process(delta):
                         destination = get_random_pos_in_room(sub.room(Globals.ROOMS_LIST[randi() % 8]))
                         state = crew_state.MOVING
 
+        crew_state.DEAD:
+            hitpoints = 0
+
 func select():
     selected = true
     get_node("Line2D").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
@@ -128,3 +141,4 @@ func select():
 func deselect():
     selected = false
     get_node("Line2D").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
+
