@@ -142,7 +142,7 @@ position = Vector2( 420, 188 )
 
 [node name="Player" parent="." index="3" instance=ExtResource( 8 )]
 
-position = Vector2( 346, 300 )
+position = Vector2( 346, 326 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Environment" type="Node" parent="." index="4"]
