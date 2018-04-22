@@ -44,3 +44,8 @@ func crewman_clicked(c):
 func command_to_room(room):
     if selected_crewman:
         selected_crewman.command_to_room(room)
+
+func can_interact(player_pos):
+    if selected_crewman:
+        return player_pos.distance_to(selected_crewman.position) < Globals.INTERACTRION_DISTANCE
+    return false

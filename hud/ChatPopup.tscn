@@ -1,26 +1,30 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://hud/ChatPopup.gd" type="Script" id=1]
+[ext_resource path="res://hud/ChatButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://hud/crewman.png" type="Texture" id=3]
+[ext_resource path="res://hud/detective.png" type="Texture" id=4]
 
-[node name="ChatWindow" type="PopupDialog"]
+[node name="ChatWindow" type="PopupDialog" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 600.0
-margin_bottom = 400.0
+margin_right = 484.0
+margin_bottom = 260.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-popup_exclusive = false
+popup_exclusive = true
 script = ExtResource( 1 )
 _sections_unfolded = [ "Popup", "Visibility" ]
+chatbutton = ExtResource( 2 )
 
-[node name="Container" type="Container" parent="." index="1"]
+[node name="Container" type="Container" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -34,5 +38,135 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Crewman" type="TextureRect" parent="Container" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 26.0
+margin_top = 30.0
+margin_right = 90.0
+margin_bottom = 94.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+stretch_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CrewmanText" type="RichTextLabel" parent="Container" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 102.0
+margin_top = 38.0
+margin_right = 402.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 300, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Hey! What do you want!?"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Detective" type="TextureRect" parent="Container" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 394.0
+margin_top = 92.0
+margin_right = 458.0
+margin_bottom = 156.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 4 )
+stretch_mode = 0
+
+[node name="DetectiveChat" type="VBoxContainer" parent="Container" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 72.0
+margin_top = 114.0
+margin_right = 372.0
+margin_bottom = 244.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Prompt" type="RichTextLabel" parent="Container/DetectiveChat" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 300.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 300, 35 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = true
+bbcode_text = "I want to find out about..."
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "I want to find out about..."
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "Rect" ]
+
+[connection signal="about_to_show" from="." to="." method="_on_ChatWindow_about_to_show"]
 
 
