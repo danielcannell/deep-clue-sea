@@ -3,7 +3,7 @@ extends Area2D
 # Class consts all in globals as settings...
 
 # Useful enums and arrays
-enum crew_state {IDLE, MOVING, ACTING, TALKING, DEAD}
+enum crew_state {IDLE, MOVING, ACTING, TALKING, DEAD, DIALOG}
 enum room_action {PUMPING, HEALING}
 var active_rooms = [
     Globals.Rooms.MedBay,
@@ -25,6 +25,7 @@ var state = crew_state.IDLE
 var current_room = null
 var destination = null
 var idle_time = 0.0
+var last_dialog_time = -INF
 
 var sub = null
 
@@ -44,11 +45,12 @@ func get_random_pos_in_room(room):
     return room.centre_position() + Vector2(rand_range(-85, 85), 0)
 
 func command_to_room(room):
-    if sub.room(sub.containing_room_id(position)) == room:
-        state = crew_state.ACTING
-    else:
-        state = crew_state.MOVING
-        destination = get_random_pos_in_room(room)
+    if state != crew_state.DEAD:
+        if sub.room(sub.containing_room_id(position)) == room:
+            state = crew_state.ACTING
+        else:
+            state = crew_state.MOVING
+            destination = get_random_pos_in_room(room)
 
 func _process(delta):
     # Get an instance of the Submarine node
@@ -61,8 +63,10 @@ func _process(delta):
         hitpoints -= Globals.DROWNING_DAMAGE_RATE * delta
     var current_speed = ((1 - sub.room(current_room).flooding() * Globals.FLOODED_MAX_SPEED) * Globals.CREW_SPEED)
     
-    if hitpoints <= 0:
+    if hitpoints <= 0 and state != crew_state.DEAD:
         state = crew_state.DEAD
+        rotation = PI / 2
+        position.y -= 15
     
     # Act based on current state
     match state:
@@ -124,7 +128,7 @@ func _process(delta):
 
         crew_state.IDLE:
             # Go to MedBay if badly injured
-            if hitpoints < 50:
+            if hitpoints < Globals.CREW_MAX_HITPOINTS / 2:
                 idle_time = 0.0
                 destination = get_random_pos_in_room(sub.room(Globals.Rooms.MedBay))
                 state = crew_state.MOVING
@@ -145,6 +149,9 @@ func _process(delta):
 
     emit_signal("hitpoints_update", hitpoints)
 
+func is_alive():
+    return state != crew_state.DEAD
+
 func select():
     selected = true
     get_node("Line2D").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
@@ -153,3 +160,8 @@ func deselect():
     selected = false
     get_node("Line2D").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
 
+func start_dialog():
+    state = crew_state.DIALOG
+
+func end_dialog():
+    state = crew_state.IDLE

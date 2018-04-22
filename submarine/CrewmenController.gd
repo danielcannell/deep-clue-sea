@@ -46,7 +46,7 @@ func command_to_room(room):
         selected_crewman.command_to_room(room)
 
 func can_interact(player_pos):
-    if selected_crewman:
+    if selected_crewman and selected_crewman.is_alive():
         return player_pos.distance_to(selected_crewman.position + position) < Globals.INTERACTRION_DISTANCE
     return false
     

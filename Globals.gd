@@ -50,6 +50,10 @@ const LADDERS_LIST = [
     Rooms.LowerRightLadder,
 ]
 
+# Global vars for the win screen
+var win_text = ""
+
+
 const ROOM_KNOWLEDGE_COUNT = 2
 const TRAITOR_KNOWLEDGE_COUNT = 2
 

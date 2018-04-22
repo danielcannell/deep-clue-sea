@@ -17,6 +17,7 @@ var on_air_time = 100
 var jumping = false
 
 var is_on_ladder = 0
+var in_dialog = false
 
 func _ready():
     # Called every time the node is added to the scene.
@@ -51,6 +52,9 @@ func _physics_process(delta):
     # Integrate forces to velocity
     velocity += force * delta
     
+    if in_dialog:
+        velocity = Vector2()
+    
     # Integrate velocity into motion and move
     velocity = move_and_slide(velocity, Vector2(0, -1))
 
@@ -76,3 +80,9 @@ func _on_Area2D_area_entered(area):
 func _on_Area2D_area_exited(area):
     if area.get_name() == "ladder":
         is_on_ladder -= 1
+
+func start_dialog():
+    in_dialog = true
+
+func end_dialog():
+    in_dialog = false

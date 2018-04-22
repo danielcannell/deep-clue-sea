@@ -15,7 +15,6 @@ func _process(delta):
     time += delta
     if time > TICK_TIME:
         time -= TICK_TIME
-        print("tick!")
         #disaster = rand_range(0, 10) < 1
         disaster = true
 
@@ -25,8 +24,6 @@ func _process(delta):
         var affected_room = submarine.room(room_id)
         var is_fire = rand_range(0, 100) < 80
         if is_fire or room_id == Globals.Rooms.PumpRoom:
-            print("fire")
             affected_room.start_fire()
         else:
-            print("flood")
             affected_room.start_flooding()
