@@ -7,4 +7,11 @@ func _on_LogButton_pressed():
     get_node("LogWindow").popup()
 
 func _on_ChatButton_pressed():
-    get_node("ChatWindow").popup()
+    show_dialog("Yes captain?", ["Ask about a person", "Ask about a place", "Nevermind"])
+
+func show_dialog(text, list_of_choices):
+    var cw = get_node("ChatWindow")
+    cw.crewman_text = text
+    cw.prompt_text = "Ask about..."
+    cw.options = list_of_choices
+    cw.popup()

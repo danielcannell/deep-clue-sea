@@ -5,7 +5,7 @@
 [ext_resource path="res://hud/LogPopup.tscn" type="PackedScene" id=3]
 [ext_resource path="res://hud/LogEntry.tscn" type="PackedScene" id=4]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -137,10 +137,11 @@ _sections_unfolded = [ "Rect" ]
 [node name="ChatWindow" parent="." index="2" instance=ExtResource( 2 )]
 
 visible = false
-margin_left = 212.0
-margin_top = 75.0
-margin_right = 812.0
-margin_bottom = 475.0
+margin_left = 270.0
+margin_top = 145.0
+margin_right = 754.0
+margin_bottom = 405.0
+_sections_unfolded = [ "Popup", "Rect", "Visibility" ]
 
 [node name="LogWindow" parent="." index="3" instance=ExtResource( 3 )]
 
