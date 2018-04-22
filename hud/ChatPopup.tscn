@@ -5,7 +5,7 @@
 [ext_resource path="res://hud/crewman.png" type="Texture" id=3]
 [ext_resource path="res://hud/detective.png" type="Texture" id=4]
 
-[node name="ChatWindow" type="PopupDialog" index="0"]
+[node name="ChatWindow" type="PopupDialog"]
 
 anchor_left = 0.0
 anchor_top = 0.0
