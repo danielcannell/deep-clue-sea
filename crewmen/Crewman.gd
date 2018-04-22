@@ -14,7 +14,7 @@ var active_rooms = [
     Globals.Rooms.PumpRoom
 ]
 
-signal clicked
+signal clicked(c)
 
 # Each crewman has a name, and is the traitor or not
 var crew_name = null
@@ -33,13 +33,17 @@ var selected = false
 func _input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton:
         if event.button_index == BUTTON_LEFT and event.pressed:
-            emit_signal("clicked")
+            emit_signal("clicked", self)
 
 func _ready():
     deselect()
 
 func get_random_pos_in_room(room):
     return room.centre_position() + Vector2(rand_range(-450, 450), 0)
+
+func command_to_room(room):
+    state = crew_state.MOVING
+    destination = get_random_pos_in_room(room)
 
 func _process(delta):
     # Get an instance of the Submarine node
