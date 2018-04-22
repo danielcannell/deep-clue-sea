@@ -24,6 +24,22 @@ func _ready():
     # Initialization here
     pass
 
+func update_animation():
+    var anim = get_node("AnimatedSprite")
+    if is_on_ladder:
+        anim.animation = "updown"
+        anim.flip_h = false
+        anim.playing = velocity.length() > 0
+    elif velocity.length() == 0:
+        anim.animation = "idle"
+        anim.flip_h = false
+    elif velocity.x > 0:
+        anim.animation = "right"
+        anim.flip_h = false
+    elif velocity.x < 0:
+        anim.animation = "right"
+        anim.flip_h = true
+
 func _physics_process(delta):
     # Create forces
     var force = Vector2(0, GRAVITY)
@@ -72,6 +88,8 @@ func _physics_process(delta):
         jumping = true
 
     on_air_time += delta
+
+    update_animation()
 
 func _on_Area2D_area_entered(area):
     if area.get_name() == "ladder":
