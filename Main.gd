@@ -1,8 +1,8 @@
 extends Node
 
-func win():
+func _on_DetectiveRoot_case_closed(win_text):
+    Globals.win_text = win_text
     get_tree().change_scene("res://WinScreen.tscn")
-    Globals.win_text = "You did it!"
 
 func _on_Submarine_dead():
     get_tree().change_scene("res://GameOver.tscn")

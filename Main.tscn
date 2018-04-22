@@ -23,4 +23,6 @@ script = ExtResource( 4 )
 
 [connection signal="hitpoints_update" from="Submarine" to="HUD" method="_on_Submarine_hitpoints_update"]
 
+[connection signal="case_closed" from="DetectiveRoot" to="." method="_on_DetectiveRoot_case_closed"]
+
 

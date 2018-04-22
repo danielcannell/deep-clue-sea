@@ -1,6 +1,6 @@
 extends Node
 
-signal case_closed
+signal case_closed(win_text)
 
 var RoomSolText = {
     Globals.Rooms.EngineRoom: "",
@@ -139,7 +139,10 @@ func crewman_clear_suspect(crew_id, suspect_id):
 
 func crewman_clear_location(crew_id, room_id):
     return crew_knowledge[crew_id]["room_knowledge"].has(room_id)
-    
+
+func is_solved():
+    return get_suspects().size() == 1 and get_potential_locations().size() == 1
+
 #-- Dialog system ----------------------------------------------------------------
 
 func chat_button_pressed():
@@ -192,6 +195,8 @@ func advance_dialog(choice):
             if crewman_clear_suspect(interrogatee, chosen_suspect):
                 msg = "I know it wasn't him!"
                 rule_out_person(chosen_suspect)
+                if is_solved():
+                    emit_signal("case_closed", "You did it!")
 
             dialog_state = DialogState.Response
             hud.show_dialog(msg, ["Ask another question", "As you were"])
@@ -204,6 +209,8 @@ func advance_dialog(choice):
             if crewman_clear_location(interrogatee, chosen_location):
                 msg = "I know it didn't happen there!"
                 rule_out_location(chosen_location)
+                if is_solved():
+                    emit_signal("case_closed", "You did it!")
 
             dialog_state = DialogState.Response
             hud.show_dialog(msg, ["Ask another question", "As you were"])
