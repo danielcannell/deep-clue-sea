@@ -33,7 +33,7 @@ func _physics_process(delta):
     var climb_down = Input.is_action_pressed("move_down")
     var jump = Input.is_action_just_pressed("jump")
 
-    if is_on_ladder:
+    if is_on_ladder > 0:
         force.y = 0
         velocity.y = 0
         if climb_up:
@@ -71,10 +71,8 @@ func _physics_process(delta):
 
 func _on_Area2D_area_entered(area):
     if area.get_name() == "ladder":
-        print("Ladder!")
         is_on_ladder += 1
 
 func _on_Area2D_area_exited(area):
     if area.get_name() == "ladder":
-        print("No Ladder!")
         is_on_ladder -= 1
