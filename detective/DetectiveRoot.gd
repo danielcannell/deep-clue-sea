@@ -22,7 +22,6 @@ var dialog_state = DialogState.None
 
 var solution = {"location":null, "traitor":null}
 var crew_knowledge = []
-
 var player_knowledge = {"suspects":[], "potential_locs": []}
 
 func _ready():
@@ -99,9 +98,22 @@ func get_player_knowledge():
 
 func get_suspects():
     return player_knowledge["suspects"]
+    
+func get_suspect_names():
+    var crew_names = get_node("/root/Main/Submarine/CrewmenController").crewmen_names
+    var suspect_names = []
+    for id in get_suspects():
+        suspect_names.append(crew_names[id])
+    return suspect_names
 
 func get_potential_locations():
     return player_knowledge["potential_locs"]
+
+func get_potential_location_names():
+    var pot_loc_names = []
+    for id in get_potential_locations():
+        pot_loc_names.append(Globals.ROOM_NAMES[id])
+    return pot_loc_names
 
 func is_suspect(crew_id):
     if player_knowledge["suspects"].has(crew_id):
