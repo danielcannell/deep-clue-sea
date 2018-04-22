@@ -20,8 +20,9 @@ func _ready():
     room(Globals.Rooms.MedBay).set_id(Globals.Rooms.MedBay)
     room(Globals.Rooms.Bridge).set_id(Globals.Rooms.Bridge)
     
+    var controller = get_node("CrewmenController")
     for rm in Globals.ROOMS_LIST:
-        room(rm).connect("clicked", self, "room_clicked")
+        room(rm).connect("clicked", controller, "command_to_room")
 
 func _process(delta):
     if hitpoints > 0.0:
@@ -35,9 +36,6 @@ func _process(delta):
 
         if hitpoints <= 0:
             emit_signal("dead")
-
-func room_clicked(id):
-    print("Clicked ", id, " ", room(id).centre_position())
 
 func room(room_id):
     match room_id:
