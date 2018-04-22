@@ -1,7 +1,7 @@
 extends Area2D
 
 # Class consts
-const CREW_SPEED = 200
+const CREW_SPEED = 70
 const HEALING_RATE = 10
 const FIRE_DAMAGE_RATE = 20
 const DROWNING_DAMAGE_RATE = 10
@@ -43,7 +43,7 @@ func _ready():
     deselect()
 
 func get_random_pos_in_room(room):
-    return room.centre_position() + Vector2(rand_range(-450, 450), 0)
+    return room.centre_position() + Vector2(rand_range(-85, 85), 0)
 
 func command_to_room(room):
     if sub.room(sub.containing_room_id(position)) == room:
