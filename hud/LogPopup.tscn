@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://hud/LogPopup.gd" type="Script" id=1]
 [ext_resource path="res://External Resources/Fonts/GNUTypewriter48pt.tres" type="DynamicFont" id=2]
-[ext_resource path="res://hud/LogEntry.tscn" type="PackedScene" id=3]
 
-[node name="LogWindow" type="PopupDialog" index="0"]
+[node name="LogWindow" type="PopupDialog"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -23,27 +22,35 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Popup", "Rect", "Theme", "Visibility" ]
 logentry = null
 
-[node name="Title" type="Label" parent="." index="0"]
+[node name="Title" type="RichTextLabel" parent="." index="0"]
 
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
 anchor_bottom = 0.0
-margin_left = -292.5
-margin_right = 292.5
-margin_bottom = 97.0
+margin_left = -140.0
+margin_top = 10.0
+margin_right = 139.0
+margin_bottom = 44.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
-text = "Captain's Log"
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center][u]Captain's Log[/u][/center]"
+visible_characters = -1
 percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Theme", "custom_fonts" ]
+meta_underlined = true
+tab_size = 4
+text = "Captain's Log"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "Rect", "custom_fonts" ]
 
 [node name="Split" type="HBoxContainer" parent="." index="1"]
 
@@ -52,7 +59,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -225.0
-margin_top = -108.0
+margin_top = -150.0
 margin_right = 225.0
 margin_bottom = 172.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -62,7 +69,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Anchor", "Rect" ]
 
 [node name="People" type="VBoxContainer" parent="Split" index="0"]
 
@@ -70,8 +77,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 150.0
-margin_bottom = 280.0
+margin_right = 225.0
+margin_bottom = 322.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -81,20 +88,63 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Anchor", "Rect" ]
 
-[node name="Container" parent="Split/People" index="0" instance=ExtResource( 3 )]
-
-margin_right = 150.0
-margin_bottom = 14.0
-
-[node name="Places" type="VBoxContainer" parent="Split" index="1"]
+[node name="Header" type="RichTextLabel" parent="Split/People" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 154.0
-margin_right = 154.0
-margin_bottom = 280.0
+margin_right = 225.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 225, 32 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center][u]Suspects[/u][/center]"
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Suspects"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "custom_fonts" ]
+
+[node name="ColorRect" type="ColorRect" parent="Split" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 229.0
+margin_right = 230.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 1, 150 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Margin", "Rect" ]
+
+[node name="Places" type="VBoxContainer" parent="Split" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 234.0
+margin_right = 459.0
+margin_bottom = 322.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -103,6 +153,35 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Rect" ]
+
+[node name="Header" type="RichTextLabel" parent="Split/Places" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 225.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 225, 32 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center][u]Crime Scenes[/u][/center]"
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Crime Scenes"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "custom_fonts" ]
 
 [connection signal="about_to_show" from="." to="." method="_on_LogWindow_about_to_show"]
 
