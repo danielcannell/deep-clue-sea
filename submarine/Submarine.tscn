@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://submarine/Submarine.gd" type="Script" id=1]
 [ext_resource path="res://submarine/tileset.tres" type="TileSet" id=2]
@@ -95,35 +95,35 @@ position = Vector2( 3712, 2176 )
 
 [node name="Crewman0" parent="Crewmen" index="0" instance=ExtResource( 5 )]
 
-position = Vector2( 4384, 1600 )
+position = Vector2( 4430.36, 1776.18 )
 
 [node name="Crewman1" parent="Crewmen" index="1" instance=ExtResource( 5 )]
 
-position = Vector2( 3072, 2336 )
+position = Vector2( 3004, 2546.18 )
 
 [node name="Crewman2" parent="Crewmen" index="2" instance=ExtResource( 5 )]
 
-position = Vector2( 3136, 832 )
+position = Vector2( 3159.29, 1009.04 )
 
 [node name="Crewman3" parent="Crewmen" index="3" instance=ExtResource( 5 )]
 
-position = Vector2( 3040, 1600 )
+position = Vector2( 2903.68, 1774.95 )
 
 [node name="Crewman4" parent="Crewmen" index="4" instance=ExtResource( 5 )]
 
-position = Vector2( 2112, 2336 )
+position = Vector2( 2065.64, 2555.45 )
 
 [node name="Crewman5" parent="Crewmen" index="5" instance=ExtResource( 5 )]
 
-position = Vector2( 2144, 1568 )
+position = Vector2( 2223.14, 1776.76 )
 
 [node name="Crewman6" parent="Crewmen" index="6" instance=ExtResource( 5 )]
 
-position = Vector2( 800, 1600 )
+position = Vector2( 722.565, 1775.52 )
 
 [node name="Crewman7" parent="Crewmen" index="7" instance=ExtResource( 5 )]
 
-position = Vector2( 2048, 832 )
+position = Vector2( 2117.89, 1013.7 )
 
 [node name="Player" parent="." index="2" instance=ExtResource( 6 )]
 
