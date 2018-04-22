@@ -45,11 +45,12 @@ func get_random_pos_in_room(room):
     return room.centre_position() + Vector2(rand_range(-85, 85), 0)
 
 func command_to_room(room):
-    if sub.room(sub.containing_room_id(position)) == room:
-        state = crew_state.ACTING
-    else:
-        state = crew_state.MOVING
-        destination = get_random_pos_in_room(room)
+    if state != crew_state.DEAD:
+        if sub.room(sub.containing_room_id(position)) == room:
+            state = crew_state.ACTING
+        else:
+            state = crew_state.MOVING
+            destination = get_random_pos_in_room(room)
 
 func _process(delta):
     # Get an instance of the Submarine node
@@ -62,8 +63,10 @@ func _process(delta):
         hitpoints -= Globals.DROWNING_DAMAGE_RATE * delta
     var current_speed = ((1 - sub.room(current_room).flooding() * Globals.FLOODED_MAX_SPEED) * Globals.CREW_SPEED)
     
-    if hitpoints <= 0:
+    if hitpoints <= 0 and state != crew_state.DEAD:
         state = crew_state.DEAD
+        rotation = PI / 2
+        position.y -= 15
     
     # Act based on current state
     match state:
@@ -125,7 +128,7 @@ func _process(delta):
 
         crew_state.IDLE:
             # Go to MedBay if badly injured
-            if hitpoints < 50:
+            if hitpoints < Globals.CREW_MAX_HITPOINTS / 2:
                 idle_time = 0.0
                 destination = get_random_pos_in_room(sub.room(Globals.Rooms.MedBay))
                 state = crew_state.MOVING
