@@ -30,6 +30,9 @@ func _ready():
     # get_node("../Submarine")
     pass
 
+func get_random_pos_in_room(room):
+    return room.centre_position() + Vector2(rand_range(-450, 450), 0)
+
 func _process(delta):
     # Get an instance of the Submarine node
     var sub = get_node("/root/Main/Submarine")
@@ -63,7 +66,7 @@ func _process(delta):
             idle_time = 0.0
             if sub.room(current_room).flooding():
                 # Flooding can only be fixed from the pump room
-                destination = Globals.Rooms.PumpRoom
+                destination = get_random_pos_in_room(sub.room(Globals.Rooms.PumpRoom))
                 state = crew_state.MOVING
 
             elif sub.room(current_room).fire():
@@ -98,7 +101,7 @@ func _process(delta):
             # Go to MedBay if injured
             if hitpoints < 100:
                 idle_time = 0.0
-                destination = Globals.Rooms.Medbay
+                destination = get_random_pos_in_room(sub.room(Globals.Rooms.Medbay))
                 state = crew_state.MOVING
             
             # Otherwise, wait for a random short time, then go to random room
@@ -109,5 +112,5 @@ func _process(delta):
                     idle_time -= delta
                     if idle_time <= 0:
                         idle_time = 0
-                        destination = Globals.ROOMS_LIST[randi() % 8]
+                        destination = get_random_pos_in_room(sub.room(Globals.ROOMS_LIST[randi() % 8]))
                         state = crew_state.MOVING
