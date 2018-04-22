@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://crewmen/Crewman.gd" type="Script" id=1]
 [ext_resource path="res://External Resources/Images/sailor.png" type="Texture" id=2]
 [ext_resource path="res://crewmen/pathplanner.gd" type="Script" id=3]
 [ext_resource path="res://crewmen/Healthbar.gd" type="Script" id=4]
+[ext_resource path="res://External Resources/Fonts/GNUTypewriter14pt.tres" type="DynamicFont" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -20,7 +21,7 @@ custom_solver_bias = 0.0
 radius = 65.0
 height = 250.0
 
-[node name="Crewman" type="Area2D"]
+[node name="Crewman" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -64,7 +65,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Healthbar" type="Node2D" parent="." index="4"]
 
-position = Vector2( 0, -72 )
+position = Vector2( 0, -68 )
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
@@ -106,6 +107,32 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.0196533, 0.628906, 0, 1 )
 _sections_unfolded = [ "Rect" ]
+
+[node name="Nameplate" type="Label" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -42.0
+margin_top = -93.0
+margin_right = 42.0
+margin_bottom = -65.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.588437, 0.217361, 0.722656, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Michael"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [connection signal="hitpoints_update" from="." to="Healthbar" method="_on_Crewman_hitpoints_update"]
 

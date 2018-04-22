@@ -2,7 +2,8 @@
 
 [ext_resource path="res://room/Room.gd" type="Script" id=1]
 [ext_resource path="res://submarine/fire.png" type="Texture" id=2]
-[ext_resource path="res://External Resources/Fonts/GNUTypewriter48pt.tres" type="DynamicFont" id=3]
+[ext_resource path="res://External Resources/Fonts/GNUTypewriter20pt.tres" type="DynamicFont" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

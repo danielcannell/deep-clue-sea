@@ -13,7 +13,7 @@ var active_rooms = [
 signal clicked(c)
 
 # Each crewman has a name, and is the traitor or not
-var crew_name = null
+var crew_name = null setget set_crewname
 var traitor = false
 var hitpoints = Globals.CREW_MAX_HITPOINTS
 var happiness = 1.0
@@ -40,6 +40,10 @@ func _input_event(viewport, event, shape_idx):
 
 func _ready():
     deselect()
+
+func set_crewname(txt):
+    crew_name = txt
+    get_node("Nameplate").text = txt
 
 func get_random_pos_in_room(room):
     return room.centre_position() + Vector2(rand_range(-85, 85), 0)
