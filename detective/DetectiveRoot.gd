@@ -205,11 +205,21 @@ func advance_dialog(choice):
         DialogState.Banter:
             match choice:
                 0:
-                    dialog_state = DialogState.CrewInterrogation
-                    hud.show_dialog("Accuse a person!", get_unenquired_suspect_names(crewman))
+                    var suspects = get_unenquired_suspect_names(crewman)
+                    if suspects.size():
+                        dialog_state = DialogState.CrewInterrogation
+                        hud.show_dialog("Accuse a person!", suspects)
+                    else:
+                        dialog_state = DialogState.BuggerOff
+                        hud.show_dialog("Stop harassing me! I can't think of a single person you haven't asked me about!", ["As you were"])
                 1:
-                    dialog_state = DialogState.RoomInterrogation
-                    hud.show_dialog("Accuse a room!", get_unenquired_potential_location_names(crewman))
+                    var locations = get_unenquired_potential_location_names(crewman)
+                    if locations.size():
+                        dialog_state = DialogState.RoomInterrogation
+                        hud.show_dialog("Accuse a room!", locations)
+                    else:
+                        dialog_state = DialogState.BuggerOff
+                        hud.show_dialog("Stop harassing me! I can't think of a single place you haven't asked me about!", ["As you were"])
                 2:
                     dialog_state = DialogState.None
                     end_dialog()
