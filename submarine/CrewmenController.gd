@@ -6,6 +6,7 @@ extends Node2D
 
 var crewmen = []
 var selected_crewman = null
+var crewman_names = []
 
 func _ready():
     crewmen = get_children()
@@ -31,6 +32,7 @@ func assign_names(crewmen):
     for c in crewmen:
         var name_ind = randi() % crew_name_pool.size()
         c.crew_name = crew_name_pool[name_ind]
+        crewman_names.append(crew_name_pool[name_ind])
         crew_name_pool.remove(name_ind)
 
 func crewman_clicked(c):
