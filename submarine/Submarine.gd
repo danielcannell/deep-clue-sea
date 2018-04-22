@@ -11,15 +11,9 @@ func _init():
     pass
 
 func _ready():
-    room(Globals.Rooms.EngineRoom).set_id(Globals.Rooms.EngineRoom)
-    room(Globals.Rooms.Instrumentation).set_id(Globals.Rooms.Instrumentation)
-    room(Globals.Rooms.WeaponControl).set_id(Globals.Rooms.WeaponControl)
-    room(Globals.Rooms.TorpedoBay).set_id(Globals.Rooms.TorpedoBay)
-    room(Globals.Rooms.LifeSupport).set_id(Globals.Rooms.LifeSupport)
-    room(Globals.Rooms.PumpRoom).set_id(Globals.Rooms.PumpRoom)
-    room(Globals.Rooms.MedBay).set_id(Globals.Rooms.MedBay)
-    room(Globals.Rooms.Bridge).set_id(Globals.Rooms.Bridge)
-    
+    for rm in Globals.ROOMS_LIST:
+        room(rm).set_name(Globals.ROOM_NAMES[rm])
+
     var controller = get_node("CrewmenController")
     for rm in Globals.ROOMS_LIST:
         room(rm).connect("clicked", controller, "command_to_room")
