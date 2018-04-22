@@ -1,8 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=2]
 
-[ext_resource path="res://crewmen/Healthbar.gd" type="Script" id=1]
-
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -13,7 +11,6 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 [node name="Healthbar" type="Node2D" parent="." index="0"]
 
 position = Vector2( 852.749, 30.8964 )
-script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
