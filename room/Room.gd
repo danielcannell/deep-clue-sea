@@ -70,7 +70,8 @@ func flooding():
     return m_flooding
 
 func centre_position():
-    return position
+    var extents = get_node("CollisionShape2D").shape.extents
+    return position + extents.y - 4
     
 func contains(pos):
     var epsilon = 5

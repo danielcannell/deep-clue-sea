@@ -21,7 +21,8 @@ func flooding():
     return 0.0
 
 func centre_position():
-    return position
+    var extents = get_node("ladder/CollisionShape2D").shape.extents
+    return position + extents.y - 4
 
 func contains(pos):
     var epsilon = 5
