@@ -133,14 +133,13 @@ func dijkstra(graph, sn, en):
     return pr
 
 # pos: Vector2D
-# endroom: int
-func get_path_vector(pos, endroom):
-    # Get startroom from pos
+# endpos: Vector2D
+func get_path_vector(pos, endpos):
+    # Get room ids
     var sn = submarine.containing_room_id(pos)
+    var en = submarine.containing_room_id(endpos)
     # Run shortest-path algorithm on graph
-    var pr = dijkstra(roomgraph, sn, endroom)
-    print(pr.path)
-    print(pr.dist)
+    var pr = dijkstra(roomgraph, sn, en)
 
     # If there is no path, return 0
     if pr.dist == INF:
@@ -149,11 +148,10 @@ func get_path_vector(pos, endroom):
     var path = pr.path
 
     # If we're in the goal room, return a vector to the room center
-    if roommapping[endroom] == path[0]:
-        return submarine.room(endroom).centre_position() - pos
+    if roommapping[en] == path[0]:
+        return endpos - pos
 
     # Work out which direction we should head in
-    print(path)
     var path_0 = null
     var path_1 = null
     for rm in roommapping.keys():

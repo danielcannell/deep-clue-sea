@@ -10,72 +10,72 @@ extents = Vector2( 128, 128 )
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 128 )
+extents = Vector2( 8, 128 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 128 )
+extents = Vector2( 8, 128 )
 
 [sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 128 )
+extents = Vector2( 8, 128 )
 
 [sub_resource type="RectangleShape2D" id=7]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=8]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 128 )
+extents = Vector2( 8, 128 )
 
 [sub_resource type="RectangleShape2D" id=9]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=10]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=11]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 48 )
+extents = Vector2( 8, 48 )
 
 [sub_resource type="RectangleShape2D" id=12]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=13]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 48 )
+extents = Vector2( 8, 48 )
 
 [sub_resource type="RectangleShape2D" id=14]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=15]
 
 custom_solver_bias = 0.0
-extents = Vector2( 128, 10 )
+extents = Vector2( 128, 8 )
 
 [sub_resource type="RectangleShape2D" id=16]
 
@@ -92,7 +92,7 @@ extents = Vector2( 96, 112 )
 custom_solver_bias = 0.0
 extents = Vector2( 96, 128 )
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="Empty" type="Sprite" parent="." index="0"]
 
@@ -147,7 +147,6 @@ shape = SubResource( 3 )
 
 [node name="RoomTopRight" type="Sprite" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( 320, -384 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -176,7 +175,6 @@ shape = SubResource( 5 )
 
 [node name="RoomBottomLeft" type="Sprite" parent="." index="3"]
 
-editor/display_folded = true
 position = Vector2( 0, -64 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -205,7 +203,6 @@ shape = SubResource( 7 )
 
 [node name="RoomBottomRight" type="Sprite" parent="." index="4"]
 
-editor/display_folded = true
 position = Vector2( 320, -64 )
 texture = ExtResource( 1 )
 region_enabled = true
