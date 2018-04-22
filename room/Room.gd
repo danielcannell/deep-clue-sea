@@ -60,4 +60,14 @@ func flooding():
     return m_flooding
 
 func centre_position():
-    return get_node("CollisionShape2D").shape.extents + position
+    return position
+    
+func contains(pos):
+    var epsilon = 5
+    var extents = get_node("CollisionShape2D").shape.extents
+    
+    return (
+        pos.x + epsilon >= position.x - extents.x and
+        pos.x - epsilon <= position.x + extents.x and
+        pos.y + epsilon >= position.y - extents.y and
+        pos.y - epsilon <= position.y + extents.y)
