@@ -154,6 +154,7 @@ func advance_dialog(choice):
     var hud = get_node("/root/Main/HUD")
     var crewmen_controller = get_node("/root/Main/Submarine/CrewmenController")
     var crewman = crewmen_controller.crewmen[interrogatee]
+    var player = get_node("/root/Main/Submarine/Player")
 
     match dialog_state:
         DialogState.None:
@@ -162,14 +163,14 @@ func advance_dialog(choice):
                 hud.show_dialog("Bugger Off!", ["As you were"])
             else:
                 crewman.start_dialog()
+                player.start_dialog()
                 dialog_state = DialogState.Banter
                 hud.show_dialog("Banter!", ["A crewmate", "A room", "As you were"])
         DialogState.BuggerOff:
             match choice:
                 0:
                     dialog_state = DialogState.None
-                    crewman.end_dialog()
-                    hud.hide_dialog()
+                    end_dialog()
         DialogState.Banter:
             match choice:
                 0:
@@ -180,8 +181,7 @@ func advance_dialog(choice):
                     hud.show_dialog("Accuse a room!", get_potential_location_names())
                 2:
                     dialog_state = DialogState.None
-                    crewman.end_dialog()
-                    hud.hide_dialog()
+                    end_dialog()
         DialogState.CrewInterrogation:
             var suspects = get_suspects()
             var chosen_suspect = suspects[choice]
@@ -214,5 +214,14 @@ func advance_dialog(choice):
                     hud.show_dialog("Bugger Off!", ["As you were"])
                 1:
                     dialog_state = DialogState.None
-                    crewman.end_dialog()
-                    hud.hide_dialog()
+                    end_dialog()
+                    
+
+func end_dialog():
+    var hud = get_node("/root/Main/HUD")
+    var crewman = get_node("/root/Main/Submarine/CrewmenController").crewmen[interrogatee]
+    var player = get_node("/root/Main/Submarine/Player")
+
+    player.end_dialog()
+    crewman.end_dialog()
+    hud.hide_dialog()
