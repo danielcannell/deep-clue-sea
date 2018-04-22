@@ -17,7 +17,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 0.9375, 0.9375 )
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Transform" ]
@@ -25,6 +24,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="TileMap" type="TileMap" parent="." index="1"]
 
 editor/display_folded = true
+position = Vector2( 30, -4 )
 mode = 0
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 48, 48 )
@@ -105,6 +105,7 @@ position = Vector2( 696, 408 )
 
 [node name="CrewmenController" type="Node2D" parent="." index="2"]
 
+position = Vector2( 30, -4 )
 script = ExtResource( 6 )
 
 [node name="Crewman0" parent="CrewmenController" index="0" instance=ExtResource( 7 )]
@@ -141,7 +142,7 @@ position = Vector2( 420, 188 )
 
 [node name="Player" parent="." index="3" instance=ExtResource( 8 )]
 
-position = Vector2( 316, 304 )
+position = Vector2( 346, 300 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Environment" type="Node" parent="." index="4"]
