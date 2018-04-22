@@ -7,9 +7,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 512, 256 )
+extents = Vector2( 96, 48 )
 
-[node name="Area2D" type="Area2D" index="0"]
+[node name="Area2D" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -24,16 +24,17 @@ _sections_unfolded = [ "Transform" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Fire" type="Node2D" parent="." index="1"]
 
-position = Vector2( 0, 256 )
+position = Vector2( 0, 48 )
 z_index = 99
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="fire" type="Sprite" parent="Fire" index="0"]
 
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.04, 0.04 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -450, -1280 )
@@ -41,7 +42,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Flood" type="Node2D" parent="." index="2"]
 
-position = Vector2( 0, 256 )
+position = Vector2( 0, 48 )
 z_index = 99
 _sections_unfolded = [ "Transform", "Z Index" ]
 
@@ -51,9 +52,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-margin_left = -512.0
-margin_top = -512.0
-margin_right = 512.0
+margin_left = -96.0
+margin_top = -96.0
+margin_right = 96.0
 margin_bottom = -64.0
 rect_pivot_offset = Vector2( 20, 20 )
 rect_clip_content = false
@@ -70,10 +71,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -512.0
-margin_top = -256.0
-margin_right = 512.0
-margin_bottom = 256.0
+margin_left = -96.0
+margin_top = -48.0
+margin_right = 96.0
+margin_bottom = 49.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2

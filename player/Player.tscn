@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 60, 140 )
+extents = Vector2( 11, 26 )
 
 [sub_resource type="SpriteFrames" id=2]
 
@@ -17,7 +17,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = true
 collision_layer = 1
@@ -43,7 +43,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
-scale = Vector2( 3, 3 )
+scale = Vector2( 0.56, 0.56 )
 frames = SubResource( 2 )
 animation = "right"
 _sections_unfolded = [ "Transform" ]
