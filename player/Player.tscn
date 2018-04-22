@@ -17,7 +17,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = true
 collision_layer = 1
@@ -28,6 +28,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
+position = Vector2( 0, -26 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -43,6 +44,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
+position = Vector2( 0, -26 )
 scale = Vector2( 0.56, 0.56 )
 frames = SubResource( 2 )
 animation = "right"
@@ -50,6 +52,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
+position = Vector2( 0, -26 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
