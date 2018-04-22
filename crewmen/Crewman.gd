@@ -12,6 +12,8 @@ var active_rooms = [
     Globals.Rooms.PumpRoom
 ]
 
+signal clicked
+
 # Each crewman has a name, and is the traitor or not
 var crew_name = null
 var traitor = false
@@ -24,11 +26,15 @@ var current_room = null
 var destination = null
 var idle_time = 0.0
 
+var selected = false
+
+func _input_event(viewport, event, shape_idx):
+    if event is InputEventMouseButton:
+        if event.button_index == BUTTON_LEFT and event.pressed:
+            emit_signal("clicked")
+
 func _ready():
-    # Called every time the node is added to the scene.
-    # Initialization here
-    # get_node("../Submarine")
-    pass
+    deselect()
 
 func get_random_pos_in_room(room):
     return room.centre_position() + Vector2(rand_range(-450, 450), 0)
@@ -114,3 +120,11 @@ func _process(delta):
                         idle_time = 0
                         destination = get_random_pos_in_room(sub.room(Globals.ROOMS_LIST[randi() % 8]))
                         state = crew_state.MOVING
+
+func select():
+    selected = true
+    get_node("Line2D").set_default_color(Color(0.2, 1.0, 0.2, 1.0))
+
+func deselect():
+    selected = false
+    get_node("Line2D").set_default_color(Color(0.0, 0.0, 0.0, 0.0))
