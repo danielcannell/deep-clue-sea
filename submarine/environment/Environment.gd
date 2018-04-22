@@ -23,10 +23,10 @@ func _process(delta):
         print("disaster")
         var room_id = Globals.ROOMS_LIST[randi() % NUMROOMS]
         var affected_room = submarine.room(room_id)
-        var disaster_type = randi() % 2
-        if disaster_type == 0:
+        var is_fire = rand_range(0, 100) < 80
+        if is_fire or room_id == Globals.Rooms.PumpRoom:
             print("fire")
             affected_room.start_fire()
-        elif disaster_type == 1:
+        else:
             print("flood")
             affected_room.start_flooding()
