@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://submarine/Submarine.gd" type="Script" id=1]
 [ext_resource path="res://submarine/tileset.tres" type="TileSet" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://room/Room.tscn" type="PackedScene" id=4]
 [ext_resource path="res://crewmen/Crewman.tscn" type="PackedScene" id=5]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://player/Player.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -18,7 +17,7 @@ extents = Vector2( 100, 1000 )
 custom_solver_bias = 0.0
 extents = Vector2( 100, 1000 )
 
-[node name="Submarine" type="Node2D"]
+[node name="Submarine" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -100,50 +99,43 @@ position = Vector2( 2048, 2304 )
 
 position = Vector2( 4352, 1536 )
 
-[node name="Crewmen" type="Node2D" parent="." index="1"]
+[node name="CrewControl" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
-
-[node name="Crewman0" parent="Crewmen" index="0" instance=ExtResource( 5 )]
+[node name="Crewman0" parent="CrewControl" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 4384, 1600 )
 
-[node name="Crewman1" parent="Crewmen" index="1" instance=ExtResource( 5 )]
+[node name="Crewman1" parent="CrewControl" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 3072, 2336 )
 
-[node name="Crewman2" parent="Crewmen" index="2" instance=ExtResource( 5 )]
+[node name="Crewman2" parent="CrewControl" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( 3136, 832 )
 
-[node name="Crewman3" parent="Crewmen" index="3" instance=ExtResource( 5 )]
+[node name="Crewman3" parent="CrewControl" index="3" instance=ExtResource( 5 )]
 
 position = Vector2( 3040, 1600 )
 
-[node name="Crewman4" parent="Crewmen" index="4" instance=ExtResource( 5 )]
+[node name="Crewman4" parent="CrewControl" index="4" instance=ExtResource( 5 )]
 
 position = Vector2( 2112, 2336 )
 
-[node name="Crewman5" parent="Crewmen" index="5" instance=ExtResource( 5 )]
+[node name="Crewman5" parent="CrewControl" index="5" instance=ExtResource( 5 )]
 
 position = Vector2( 2144, 1568 )
 
-[node name="Crewman6" parent="Crewmen" index="6" instance=ExtResource( 5 )]
+[node name="Crewman6" parent="CrewControl" index="6" instance=ExtResource( 5 )]
 
 position = Vector2( 800, 1600 )
 
-[node name="Crewman7" parent="Crewmen" index="7" instance=ExtResource( 5 )]
+[node name="Crewman7" parent="CrewControl" index="7" instance=ExtResource( 5 )]
 
 position = Vector2( 2048, 832 )
 
-[node name="Player" type="KinematicBody2D" parent="." index="2" instance=ExtResource( 6 )]
+[node name="Player" parent="." index="2" instance=ExtResource( 6 )]
 
 position = Vector2( 1760, 1568 )
-input_pickable = true
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 7 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 
