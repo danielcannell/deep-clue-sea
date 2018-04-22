@@ -9,6 +9,7 @@ var selected_crewman = null
 
 func _ready():
     crewmen = get_children()
+    assign_names(crewmen)
     
     for c in crewmen:
         c.connect("clicked", self, "crewman_clicked")
@@ -17,6 +18,20 @@ func _ready():
 #    # Called every frame. Delta is time since last frame.
 #    # Update game logic here.
 #    pass
+
+func assign_names(crewmen):
+    # Get array of crew names, not allowing empty lines
+    var crew_name_file = File.new()
+    crew_name_file.open("res://crewmen/crewnames.txt", crew_name_file.READ)
+    var crew_name_pool = crew_name_file.get_as_text()
+    crew_name_pool = crew_name_pool.split("\n", false)
+    crew_name_file.close()
+    
+    # Assign each crew member a random name
+    for c in crewmen:
+        var name_ind = randi() % crew_name_pool.size()
+        c.crew_name = crew_name_pool[name_ind]
+        crew_name_pool.remove(name_ind)
 
 func crewman_clicked(c):
     if selected_crewman:
