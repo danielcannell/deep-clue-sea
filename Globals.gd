@@ -19,6 +19,17 @@ enum Rooms {
     LowerRightLadder,
 }
 
+const ROOM_NAMES = [
+    "Engine Room",
+    "Instrumentation",
+    "Weapon Control",
+    "Torpedo Bay",
+    "Life Support",
+    "Pump Room",
+    "Med Bay",
+    "Bridge",
+]
+
 const ROOMS_LIST = [
     Rooms.EngineRoom,
     Rooms.Instrumentation,

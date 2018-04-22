@@ -8,7 +8,6 @@ const DRAIN_RATE = 0.02
 
 var m_fire = 0.0
 var m_flooding = 0.0
-var m_id = null
 
 signal clicked(room)
 
@@ -36,11 +35,8 @@ func _input_event(viewport, event, shape_idx):
         if event.button_index == BUTTON_RIGHT and event.pressed:
             emit_signal("clicked", self)
 
-func id():
-    return m_id
-
-func set_id(id):
-    m_id = id
+func set_name(name):
+    get_node("RoomName").set_text(name)
 
 func start_fire():
     if m_fire <= 0.0 and m_flooding <= 0.0:

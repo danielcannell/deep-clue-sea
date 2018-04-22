@@ -19,10 +19,10 @@ func _ready():
 #    pass
 
 func crewman_clicked(c):
-    c.select()
     if selected_crewman:
         selected_crewman.deselect()
     selected_crewman = c
+    selected_crewman.select()
 
 func command_to_room(room):
     if selected_crewman:
