@@ -19,5 +19,9 @@ func show_dialog(text, list_of_choices):
     cw.options = list_of_choices
     cw.popup()
 
+func hide_dialog():
+    var cw = get_node("ChatWindow")
+    cw.hide()
+
 func _on_ChatWindow_option_selected(id):
     emit_signal("chat_option_selected", id)
