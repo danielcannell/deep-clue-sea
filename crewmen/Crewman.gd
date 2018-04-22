@@ -28,6 +28,8 @@ var current_room = null
 var destination = null
 var idle_time = 0.0
 
+var sub = null
+
 var selected = false
 
 signal hitpoints_update
@@ -44,12 +46,15 @@ func get_random_pos_in_room(room):
     return room.centre_position() + Vector2(rand_range(-450, 450), 0)
 
 func command_to_room(room):
-    state = crew_state.MOVING
-    destination = get_random_pos_in_room(room)
+    if sub.room(sub.containing_room_id(position)) == room:
+        state = crew_state.ACTING
+    else:
+        state = crew_state.MOVING
+        destination = get_random_pos_in_room(room)
 
 func _process(delta):
     # Get an instance of the Submarine node
-    var sub = get_node("/root/Main/Submarine")
+    sub = get_node("/root/Main/Submarine")
     
     # Update the current room
     current_room = sub.containing_room_id(position)
