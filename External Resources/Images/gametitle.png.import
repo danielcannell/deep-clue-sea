@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/submarine.png-513e612f5cde324ae97bd01de0d84dfc.stex"
+path="res://.import/gametitle.png-7bcf1162e4f17c403e22623e2dc9e3f8.stex"
 
 [deps]
 
-source_file="res://submarine/submarine.png"
-source_md5="9c2f97b0f447b7a8ddef4aa5c8cccaf9"
+source_file="res://External Resources/Images/gametitle.png"
+source_md5="037dcaa754507bc5b5f31cb2fd593c89"
 
-dest_files=[ "res://.import/submarine.png-513e612f5cde324ae97bd01de0d84dfc.stex" ]
-dest_md5="8e058fd9fb88bdaacd8e2e28fbadf0d3"
+dest_files=[ "res://.import/gametitle.png-7bcf1162e4f17c403e22623e2dc9e3f8.stex" ]
+dest_md5="6e59f5e627bc60c60f630c53b5501eba"
 
 [params]
 

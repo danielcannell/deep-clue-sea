@@ -95,12 +95,10 @@ func get_length(u, v):
     var fire = room.fire()
     var flooding = room.flooding()
     var cost = 0
-    if flooding == 1.0:
-        cost = INF
-    elif flooding > 0.0:
-        cost = 5 * flooding
+    if flooding > 0.0:
+        cost = 10 * flooding
     elif fire > 0.0:
-        cost = 30
+        cost = 30 * fire
     return 1 + cost
 
 func dijkstra(graph, start_room, end_room):
