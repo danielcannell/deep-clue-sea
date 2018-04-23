@@ -84,15 +84,17 @@ func initialise_case():
     var i = 0
     for room_knl in range(not_solution_rooms):
         var crew = i % num_crew
-        var knl_item = randi() % not_solution_rooms_list.size()
-        crew_knowledge[crew]["room_knowledge"].append(not_solution_rooms_list[knl_item])
+        var knl_item = not_solution_rooms_list[randi() % not_solution_rooms_list.size()]
+        crew_knowledge[crew]["room_knowledge"].append(knl_item)
         not_solution_rooms_list.remove(knl_item)
         i += 1
 
     for traitor_knl in range(not_guilty_crew):
         var crew = i % num_crew
-        var knl_item = randi() % not_solution_crew_list.size()
-        crew_knowledge[crew]["people_knowledge"].append(not_solution_crew_list[knl_item])
+        var knl_item = not_solution_crew_list[randi() % not_solution_crew_list.size()]
+        while knl_item == crew:
+            knl_item = not_solution_crew_list[randi() % not_solution_crew_list.size()]
+        crew_knowledge[crew]["people_knowledge"].append(knl_item)
         not_solution_crew_list.remove(knl_item)
         i += 1
 
@@ -117,9 +119,12 @@ func get_suspect_names():
 
 func get_unenquired_suspects(crewman):
     var suspects = []
+    var crewman_id = get_node("/root/Main/Submarine/CrewmenController").crewmen.find(crewman)
     for s in get_suspects():
         if crewman.enquired_crew.find(s) < 0:
             suspects.append(s)
+    if suspects.find(crewman_id) >= 0:
+        suspects.erase(crewman_id)
     return suspects
 
 func get_unenquired_suspect_names(crewman):
