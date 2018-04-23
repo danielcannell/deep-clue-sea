@@ -14,11 +14,7 @@ signal clicked(c)
 
 # Each crewman has a name, and is the traitor or not
 var crew_name = null setget set_crewname
-var traitor = false
 var hitpoints = Globals.CREW_MAX_HITPOINTS
-var happiness = 1.0
-var room_knowledge = []
-var traitor_knowledge = []
 
 # Current state info
 var state = crew_state.IDLE
@@ -66,7 +62,7 @@ func _process(delta):
     # Update the current room
     current_room = sub.containing_room_id(position)
     hitpoints -= (sub.room(current_room).fire() * Globals.FIRE_DAMAGE_RATE * delta)
-    if sub.room(current_room).flooding() > 0.7:
+    if sub.room(current_room).flooding() > Globals.ROOM_FLOODING_DROWNING_LIMIT:
         hitpoints -= Globals.DROWNING_DAMAGE_RATE * delta
     var current_speed = ((1 - sub.room(current_room).flooding() * Globals.FLOODED_MAX_SPEED) * Globals.CREW_SPEED)
     
@@ -106,7 +102,7 @@ func _process(delta):
                 state = crew_state.MOVING
 
             elif sub.room(current_room).fire():
-                var extinguished = sub.room(current_room).extinguish_fire()
+                var extinguished = sub.room(current_room).extinguish_fire(delta)
                 if extinguished:
                     state = crew_state.IDLE
 
@@ -115,16 +111,16 @@ func _process(delta):
                 
                 # Pump out all rooms
                 for room in Globals.ROOMS_LIST:
-                    flood_clear = flood_clear && sub.room(room).drain_flooding()
+                    flood_clear = flood_clear && sub.room(room).drain_flooding(delta)
                 if flood_clear:
                     state = crew_state.IDLE
             
             # Heal if necessary
             elif current_room == Globals.Rooms.MedBay:
-                if hitpoints < 100:
+                if hitpoints < Globals.CREW_MAX_HITPOINTS:
                     hitpoints += Globals.HEALING_RATE * delta
-                    if hitpoints > 100:
-                        hitpoints = 100
+                    if hitpoints > Globals.CREW_MAX_HITPOINTS:
+                        hitpoints = Globals.CREW_MAX_HITPOINTS
                         state = crew_state.IDLE
                 else:
                     state = crew_state.IDLE
@@ -143,7 +139,7 @@ func _process(delta):
             # Otherwise, wait for a random short time, then go to random room
             else:
                 if not idle_time:
-                    idle_time = randi() % 7  + 3
+                    idle_time = rand_range(Globals.IDLE_TIME_MIN, Globals.IDLE_TIME_MAX)
                 else:
                     idle_time -= delta
                     if idle_time <= 0:

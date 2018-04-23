@@ -1,8 +1,6 @@
 extends Node2D
 
-const BURN_DAMAGE = 0.5
-
-var hitpoints = 100
+var hitpoints = Globals.SUB_MAX_HITPOINTS
 
 signal dead
 signal hitpoints_update
@@ -24,7 +22,7 @@ func _process(delta):
         for roomid in Globals.ROOMS_LIST:
             var r = room(roomid)
             if r.fire() > 0.0:
-                hitpoints -= BURN_DAMAGE * delta
+                hitpoints -= Globals.SUB_FIRE_DAMAGE_RATE * delta
 
         emit_signal("hitpoints_update", hitpoints)
 

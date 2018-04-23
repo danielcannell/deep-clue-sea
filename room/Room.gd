@@ -1,11 +1,5 @@
 extends Area2D
 
-const BURN_RATE = 0.01
-const FLOOD_RATE = 0.01
-
-const EXTINGUISH_RATE = 0.02
-const DRAIN_RATE = 0.02
-
 var m_fire = 0.0
 var m_flooding = 0.0
 
@@ -16,9 +10,9 @@ func _ready():
 
 func _process(delta):
     if m_fire > 0.0:
-        m_fire = min(m_fire + BURN_RATE * delta, 1)
+        m_fire = min(m_fire + Globals.ROOM_BURN_RATE * delta, 1)
     if m_flooding > 0.0:
-        m_flooding = min(m_flooding + FLOOD_RATE * delta, 1)
+        m_flooding = min(m_flooding + Globals.ROOM_FLOOD_RATE * delta, 1)
 
     var fire_scale = 0
     if m_fire > 0.0:
@@ -40,21 +34,21 @@ func set_name(name):
 
 func start_fire():
     if m_fire <= 0.0 and m_flooding <= 0.0:
-        m_fire = BURN_RATE
+        m_fire = Globals.ROOM_BURN_RATE
     
 func start_flooding():
     m_fire = 0.0
     if m_flooding <= 0.0:
-        m_flooding = FLOOD_RATE
+        m_flooding = Globals.ROOM_FLOOD_RATE
 
-func extinguish_fire():
-    m_fire -= EXTINGUISH_RATE
+func extinguish_fire(delta):
+    m_fire -= Globals.FIRE_EXTINGUISH_RATE * delta
     if m_fire < 0.0:
         m_fire = 0.0
         return true
 
-func drain_flooding():
-    m_flooding -= DRAIN_RATE
+func drain_flooding(delta):
+    m_flooding -= Globals.FLOOD_DRAIN_RATE * delta
     if m_flooding < 0.0:
         m_flooding = 0.0
         return true
