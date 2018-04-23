@@ -15,14 +15,12 @@ func _process(delta):
     time += delta
     if time > TICK_TIME:
         time -= TICK_TIME
-        #disaster = rand_range(0, 10) < 1
-        disaster = true
+        disaster = rand_range(0, 100) < Globals.DISASTER_PERCENTAGE_PER_SECOND
 
     if disaster:
-        print("disaster")
         var room_id = Globals.ROOMS_LIST[randi() % NUMROOMS]
         var affected_room = submarine.room(room_id)
-        var is_fire = rand_range(0, 100) < 80
+        var is_fire = rand_range(0, 100) < Globals.FIRE_PERCENTAGE
         if is_fire or room_id == Globals.Rooms.PumpRoom:
             affected_room.start_fire()
         else:
