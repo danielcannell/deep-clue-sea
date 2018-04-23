@@ -92,9 +92,16 @@ func initialise_case():
     for traitor_knl in range(not_guilty_crew):
         var crew = i % num_crew
         var knl_item = randi() % not_solution_crew_list.size()
-        while not_solution_crew_list[knl_item] == crew:
-            knl_item = randi() % not_solution_crew_list.size()
-        crew_knowledge[crew]["people_knowledge"].append(not_solution_crew_list[knl_item])
+        for i in range(10):
+            var drop = true
+            if not_solution_crew_list[knl_item] == crew:
+                knl_item = randi() % not_solution_crew_list.size()
+            else:
+                drop = false
+                break
+        if not drop:
+            crew_knowledge[crew]["people_knowledge"].append(not_solution_crew_list[knl_item])
+        
         not_solution_crew_list.remove(knl_item)
         i += 1
 
