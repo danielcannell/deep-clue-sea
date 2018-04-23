@@ -50,6 +50,53 @@ const LADDERS_LIST = [
     Rooms.LowerRightLadder,
 ]
 
+const GREETING_MESSAGES = [
+    "Yes, captain?",
+    "Hmm?",
+    "What can I do you for captain?",
+    "Need anything? We're all a bit busy around here you know!",
+    "How can I help, captain?",
+]
+
+const BUGGER_OFF_MESSAGES = [
+    "Bugger off!",
+    "Sorry, too busy to talk; you do know that the boat's on fire right?",
+    "Haven't you harrassed me enough already?",
+    "Too busy!",
+]
+
+const MAYBE_THIS_PERSON_MESSAGES = [
+    "I wasn't with them at the time, so I can't say.",
+    "I don't know what they were doing at the time.",
+    "I know nothing!",
+    "No clue.",
+]
+
+const NOT_THIS_PERSON_MESSAGES = [
+    "It can't be him... I was with him at the time.",
+    "It wasn't him; I was on watch with him at the time.",
+]
+
+const MAYBE_THIS_PLACE_MESSAGES = [
+    "I wasn't there at the time, so I can't say.",
+    "I know nothing!",
+    "No clue.",
+]
+
+const NOT_THIS_PLACE_MESSAGES = [
+    "It can't have happened there; I was working in there at the time",
+]
+
+const CASE_CLOSED_MESSAGES = [
+    "Well I never! %s turned on the afterburner from the engine room while we were hiding in the enemy port.",
+    "Well done! %s transmitted our location to the enemy by hacking the sonar to broadcast it using morse code!",
+    "Who would have guessed. %s set off the New Year party fireworks from weapon control in a display that could be seen clear from the enemy harbour.",
+    "You got it! %s wrote our location on a postcard and fired it at the enemy from the torpedo room.",
+    "Superb detective work. It wasn't an accident when the life support broke last week; it was %s who used the distraction to compromise our position.",
+    "Case closed. %s pumped dye into the sea from the pump room leading a trail for the enemy to follow.",
+    "What on earth?! %s implanted trackers in the captains pet pidgeon and let it escape.",
+    "You figured it out! %s leaked our position by launching a carrier pidgeon off the periscope from the bridge.",
+]
 
 # Global vars for the win screen
 var win_text = ""
