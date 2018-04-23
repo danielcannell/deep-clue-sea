@@ -1,7 +1,7 @@
 extends Container
 
 func _ready():
-    connect("pressed", self, "loop")
+    get_node("AudioStreamPlayer").connect("pressed", self, "loop")
 
 func loop():
     play()
