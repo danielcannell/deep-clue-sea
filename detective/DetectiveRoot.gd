@@ -92,6 +92,8 @@ func initialise_case():
     for traitor_knl in range(not_guilty_crew):
         var crew = i % num_crew
         var knl_item = randi() % not_solution_crew_list.size()
+        while not_solution_crew_list[knl_item] == crew:
+            knl_item = randi() % not_solution_crew_list.size()
         crew_knowledge[crew]["people_knowledge"].append(not_solution_crew_list[knl_item])
         not_solution_crew_list.remove(knl_item)
         i += 1
@@ -117,9 +119,12 @@ func get_suspect_names():
 
 func get_unenquired_suspects(crewman):
     var suspects = []
+    var crewman_id = get_node("/root/Main/Submarine/CrewmenController").crewmen.find(crewman)
     for s in get_suspects():
         if crewman.enquired_crew.find(s) < 0:
             suspects.append(s)
+    if suspects.find(crewman_id) >= 0:
+        suspects.erase(crewman_id)
     return suspects
 
 func get_unenquired_suspect_names(crewman):
@@ -255,7 +260,8 @@ func advance_dialog(choice):
                 msg = not_this_person_message()
                 rule_out_person(chosen_suspect)
                 if is_solved():
-                    emit_signal("case_closed", "You did it!")
+                    msg = case_closed_message(get_potential_locations()[0], get_suspect_names()[0])
+                    emit_signal("case_closed", msg)
 
             dialog_state = DialogState.Response
             hud.show_dialog(msg, ["Ask another question", "As you were"])
@@ -268,6 +274,8 @@ func advance_dialog(choice):
             
             if crewman_clear_location(interrogatee, chosen_location):
                 msg = not_this_place_message()
+                if msg.find("%s") >= 0:
+                    msg = msg % Globals.ROOM_NAMES[chosen_location]
                 rule_out_location(chosen_location)
                 if is_solved():
                     msg = case_closed_message(get_potential_locations()[0], get_suspect_names()[0])

@@ -21,7 +21,7 @@ enum Rooms {
 
 const ROOM_NAMES = [
     "Engine Room",
-    "Instrumentation",
+    "Sonar Room",
     "Weapon Control",
     "Torpedo Bay",
     "Life Support",
@@ -84,18 +84,20 @@ const MAYBE_THIS_PLACE_MESSAGES = [
 ]
 
 const NOT_THIS_PLACE_MESSAGES = [
-    "It can't have happened there; I was working in there at the time",
+    "It can't have happened there; I was working in there at the time.",
+    "That's my chill-out spot - I would have seen if something happened!",
+    "I was on watch in the %s, and nothing happened!",
 ]
 
 const CASE_CLOSED_MESSAGES = [
     "Well I never! %s turned on the afterburner from the engine room while we were hiding in the enemy port.",
     "Well done! %s transmitted our location to the enemy by hacking the sonar to broadcast it using morse code!",
-    "Who would have guessed. %s set off the New Year party fireworks from weapon control in a display that could be seen clear from the enemy harbour.",
+    "Who would have guessed? %s set off the New Year party fireworks from weapon control in a display that could be seen clear from the enemy harbour.",
     "You got it! %s wrote our location on a postcard and fired it at the enemy from the torpedo room.",
     "Superb detective work. It wasn't an accident when the life support broke last week; it was %s who used the distraction to compromise our position.",
-    "Case closed. %s pumped dye into the sea from the pump room leading a trail for the enemy to follow.",
-    "What on earth?! %s implanted trackers in the captains pet pidgeon and let it escape.",
-    "You figured it out! %s leaked our position by launching a carrier pidgeon off the periscope from the bridge.",
+    "Case closed. %s pumped dye into the sea from the pump room leaving a trail for the enemy to follow.",
+    "What on earth?! %s implanted trackers in the captain's pet pigeon and let it escape.",
+    "You figured it out! %s leaked our position by launching a carrier pigeon off the periscope from the bridge.",
 ]
 
 # Global vars for the win screen
@@ -103,8 +105,8 @@ var win_text = ""
 
 
 # Detective settings
-const ROOM_KNOWLEDGE_COUNT = 10
-const TRAITOR_KNOWLEDGE_COUNT = 10
+const ROOM_KNOWLEDGE_COUNT = 8
+const TRAITOR_KNOWLEDGE_COUNT = 8
 
 # Player settings
 
@@ -115,7 +117,7 @@ const PLAYER_WALK_SPEED = 200
 const PLAYER_CLIMB_SPEED = 200
 
 # Crewman settings
-const CREW_SPEED = 200
+const CREW_SPEED = 150
 const FLOODED_MAX_SPEED = 0.25
 const HEALING_RATE = 10
 
@@ -146,4 +148,4 @@ const FIRE_EXTINGUISH_RATE = 1.0
 const FLOOD_DRAIN_RATE = 0.3
 
 const SUB_MAX_HITPOINTS = 100
-const SUB_FIRE_DAMAGE_RATE = 0.05
+const SUB_FIRE_DAMAGE_RATE = 0.4
