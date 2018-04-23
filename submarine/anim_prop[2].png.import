@@ -7,10 +7,10 @@ path="res://.import/anim_prop[2].png-d83b1c08cf99be827fc4e9279e8f6021.stex"
 [deps]
 
 source_file="res://submarine/anim_prop[2].png"
-source_md5="bd5e986664adec04f4c6ee21695fa3ac"
+source_md5="683281fb404b3b8f88a037f509aa3089"
 
 dest_files=[ "res://.import/anim_prop[2].png-d83b1c08cf99be827fc4e9279e8f6021.stex" ]
-dest_md5="78abdf42adda70a86576cedad84dc2cf"
+dest_md5="3b6ffb9371536c6a3041e55ef633865a"
 
 [params]
 
