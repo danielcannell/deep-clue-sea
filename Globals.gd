@@ -56,8 +56,8 @@ var win_text = ""
 
 
 # Detective settings
-const ROOM_KNOWLEDGE_COUNT = 2
-const TRAITOR_KNOWLEDGE_COUNT = 2
+const ROOM_KNOWLEDGE_COUNT = 10
+const TRAITOR_KNOWLEDGE_COUNT = 10
 
 # Player settings
 
