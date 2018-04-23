@@ -84,17 +84,17 @@ func initialise_case():
     var i = 0
     for room_knl in range(not_solution_rooms):
         var crew = i % num_crew
-        var knl_item = not_solution_rooms_list[randi() % not_solution_rooms_list.size()]
-        crew_knowledge[crew]["room_knowledge"].append(knl_item)
+        var knl_item = randi() % not_solution_rooms_list.size()
+        crew_knowledge[crew]["room_knowledge"].append(not_solution_rooms_list[knl_item])
         not_solution_rooms_list.remove(knl_item)
         i += 1
 
     for traitor_knl in range(not_guilty_crew):
         var crew = i % num_crew
-        var knl_item = not_solution_crew_list[randi() % not_solution_crew_list.size()]
-        while knl_item == crew:
-            knl_item = not_solution_crew_list[randi() % not_solution_crew_list.size()]
-        crew_knowledge[crew]["people_knowledge"].append(knl_item)
+        var knl_item = randi() % not_solution_crew_list.size()
+        while not_solution_crew_list[knl_item] == crew:
+            knl_item = randi() % not_solution_crew_list.size()
+        crew_knowledge[crew]["people_knowledge"].append(not_solution_crew_list[knl_item])
         not_solution_crew_list.remove(knl_item)
         i += 1
 
@@ -274,6 +274,8 @@ func advance_dialog(choice):
             
             if crewman_clear_location(interrogatee, chosen_location):
                 msg = not_this_place_message()
+                if msg.find("%s") >= 0:
+                    msg = msg % Globals.ROOM_NAMES[chosen_location]
                 rule_out_location(chosen_location)
                 if is_solved():
                     msg = case_closed_message(get_potential_locations()[0], get_suspect_names()[0])

@@ -21,7 +21,7 @@ enum Rooms {
 
 const ROOM_NAMES = [
     "Engine Room",
-    "Instrumentation",
+    "Sonar Room",
     "Weapon Control",
     "Torpedo Bay",
     "Life Support",
@@ -84,7 +84,9 @@ const MAYBE_THIS_PLACE_MESSAGES = [
 ]
 
 const NOT_THIS_PLACE_MESSAGES = [
-    "It can't have happened there; I was working in there at the time",
+    "It can't have happened there; I was working in there at the time.",
+    "That's my chill-out spot - I would have seen if something happened!",
+    "I was on watch in the %s, and nothing happened!",
 ]
 
 const CASE_CLOSED_MESSAGES = [
@@ -115,7 +117,7 @@ const PLAYER_WALK_SPEED = 200
 const PLAYER_CLIMB_SPEED = 200
 
 # Crewman settings
-const CREW_SPEED = 200
+const CREW_SPEED = 150
 const FLOODED_MAX_SPEED = 0.25
 const HEALING_RATE = 10
 
@@ -146,4 +148,4 @@ const FIRE_EXTINGUISH_RATE = 1.0
 const FLOOD_DRAIN_RATE = 0.3
 
 const SUB_MAX_HITPOINTS = 100
-const SUB_FIRE_DAMAGE_RATE = 0.2
+const SUB_FIRE_DAMAGE_RATE = 0.4
