@@ -50,6 +50,20 @@ const LADDERS_LIST = [
     Rooms.LowerRightLadder,
 ]
 
+const CREW_NAMES_POOL = [
+    "John",
+    "James",
+    "Dan",
+    "Jamie",
+    "Aidan",
+    "Carol",
+    "Caspar",
+    "Rhys",
+    "Carys",
+    "Alex",
+    "Michael"
+]
+
 const GREETING_MESSAGES = [
     "Yes, captain?",
     "Hmm?",

@@ -30,6 +30,7 @@ var crew_knowledge = []
 var player_knowledge = {"suspects":[], "potential_locs": []}
 
 func _ready():
+    randomize()
     # Register for chat button clicks
     var hud = get_node("/root/Main/HUD")
     hud.connect("chat_button_pressed", self, "chat_button_pressed")
@@ -92,8 +93,8 @@ func initialise_case():
     for traitor_knl in range(not_guilty_crew):
         var crew = i % num_crew
         var knl_item = randi() % not_solution_crew_list.size()
+        var drop = true
         for i in range(10):
-            var drop = true
             if not_solution_crew_list[knl_item] == crew:
                 knl_item = randi() % not_solution_crew_list.size()
             else:
