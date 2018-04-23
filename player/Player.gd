@@ -1,17 +1,6 @@
 extends KinematicBody2D
 
 # Member variables
-const GRAVITY = 1000.0 # pixels/second/second
-
-const JUMP_SPEED = 200
-const JUMP_MAX_AIRBORNE_TIME = 0.2
-
-const WALK_SPEED = 200
-const CLIMB_SPEED = 200
-
-const SLIDE_STOP_VELOCITY = 1.0 # one pixel/second
-const SLIDE_STOP_MIN_TRAVEL = 1.0 # one pixel
-
 var velocity = Vector2()
 var on_air_time = 100
 var jumping = false
@@ -42,7 +31,7 @@ func update_animation():
 
 func _physics_process(delta):
     # Create forces
-    var force = Vector2(0, GRAVITY)
+    var force = Vector2(0, Globals.GRAVITY)
 
     var walk_left = Input.is_action_pressed("move_left")
     var walk_right = Input.is_action_pressed("move_right")
@@ -54,14 +43,14 @@ func _physics_process(delta):
         force.y = 0
         velocity.y = 0
         if climb_up:
-            velocity.y = -CLIMB_SPEED
+            velocity.y = -Globals.PLAYER_CLIMB_SPEED
         elif climb_down:
-            velocity.y = CLIMB_SPEED
+            velocity.y = Globals.PLAYER_CLIMB_SPEED
 
     if walk_left:
-        velocity.x = -WALK_SPEED
+        velocity.x = -Globals.PLAYER_WALK_SPEED
     elif walk_right:
-        velocity.x = WALK_SPEED
+        velocity.x = Globals.PLAYER_WALK_SPEED
     else:
         velocity.x = 0
 
@@ -81,10 +70,10 @@ func _physics_process(delta):
         # If falling, no longer jumping
         jumping = false
 
-    if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not jumping:
+    if on_air_time < Globals.PLAYER_JUMP_MAX_AIRBORNE_TIME and jump and not jumping:
         # Jump must also be allowed to happen if the character left the floor a little bit ago.
         # Makes controls more snappy.
-        velocity.y = -JUMP_SPEED
+        velocity.y = -Globals.PLAYER_JUMP_SPEED
         jumping = true
 
     on_air_time += delta

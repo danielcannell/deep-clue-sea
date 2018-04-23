@@ -102,7 +102,7 @@ func _process(delta):
                 state = crew_state.MOVING
 
             elif sub.room(current_room).fire():
-                var extinguished = sub.room(current_room).extinguish_fire()
+                var extinguished = sub.room(current_room).extinguish_fire(delta)
                 if extinguished:
                     state = crew_state.IDLE
 
@@ -111,7 +111,7 @@ func _process(delta):
                 
                 # Pump out all rooms
                 for room in Globals.ROOMS_LIST:
-                    flood_clear = flood_clear && sub.room(room).drain_flooding()
+                    flood_clear = flood_clear && sub.room(room).drain_flooding(delta)
                 if flood_clear:
                     state = crew_state.IDLE
             
