@@ -18,6 +18,7 @@ func _process(delta):
     if m_fire > 0.0:
         fire_scale = 0.3 + (m_fire * 0.7)
     get_node("Fire").set_scale(Vector2(fire_scale, fire_scale))
+    get_node("Fire").set_rotation(deg2rad(rand_range(-5, 5)))
 
     var flood_scale = 0
     if m_flooding > 0.0:
