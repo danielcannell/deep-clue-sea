@@ -260,7 +260,8 @@ func advance_dialog(choice):
                 msg = not_this_person_message()
                 rule_out_person(chosen_suspect)
                 if is_solved():
-                    emit_signal("case_closed", "You did it!")
+                    msg = case_closed_message(get_potential_locations()[0], get_suspect_names()[0])
+                    emit_signal("case_closed", msg)
 
             dialog_state = DialogState.Response
             hud.show_dialog(msg, ["Ask another question", "As you were"])
