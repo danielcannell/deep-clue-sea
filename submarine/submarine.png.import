@@ -7,10 +7,10 @@ path="res://.import/submarine.png-513e612f5cde324ae97bd01de0d84dfc.stex"
 [deps]
 
 source_file="res://submarine/submarine.png"
-source_md5="3c15bd431731b020c152e11e795c0fad"
+source_md5="a70ec84ced3ac5373c620ceee429b244"
 
 dest_files=[ "res://.import/submarine.png-513e612f5cde324ae97bd01de0d84dfc.stex" ]
-dest_md5="6bcb7c703715fe600a7efa75094769ec"
+dest_md5="79f9d6839b80293eb6e2f0ceb7f3c464"
 
 [params]
 

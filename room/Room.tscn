@@ -4,7 +4,6 @@
 [ext_resource path="res://submarine/fire.png" type="Texture" id=2]
 [ext_resource path="res://External Resources/Fonts/GNUTypewriter20pt.tres" type="DynamicFont" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -35,7 +34,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="fire" type="Sprite" parent="Fire" index="0"]
 
-scale = Vector2( 0.04, 0.04 )
+scale = Vector2( 0.06, 0.06 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -450, -1280 )
@@ -75,7 +74,7 @@ anchor_bottom = 0.0
 margin_left = -96.0
 margin_top = -48.0
 margin_right = 96.0
-margin_bottom = 49.0
+margin_bottom = 2.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
