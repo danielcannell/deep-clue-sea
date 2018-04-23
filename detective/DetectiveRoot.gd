@@ -180,6 +180,27 @@ func chat_button_pressed():
         interrogatee = crewmen_controller.selected_crewman_id()
         advance_dialog(-1)
 
+func greeting_message():
+    return Globals.GREETING_MESSAGES[randi() % Globals.GREETING_MESSAGES.size()]
+
+func bugger_off_message():
+    return Globals.BUGGER_OFF_MESSAGES[randi() % Globals.BUGGER_OFF_MESSAGES.size()]
+
+func maybe_this_person_messages():
+    return Globals.MAYBE_THIS_PERSON_MESSAGES[randi() % Globals.MAYBE_THIS_PERSON_MESSAGES.size()]
+
+func not_this_person_message():
+    return Globals.NOT_THIS_PERSON_MESSAGES[randi() % Globals.NOT_THIS_PERSON_MESSAGES.size()]
+
+func maybe_this_place_message():
+    return Globals.MAYBE_THIS_PLACE_MESSAGES[randi() % Globals.MAYBE_THIS_PLACE_MESSAGES.size()]
+
+func not_this_place_message():
+    return Globals.NOT_THIS_PLACE_MESSAGES[randi() % Globals.NOT_THIS_PLACE_MESSAGES.size()]
+
+func case_closed_message(room_id, crewman_name):
+    return Globals.CASE_CLOSED_MESSAGES[room_id] % crewman_name
+
 func advance_dialog(choice):
     var hud = get_node("/root/Main/HUD")
     var crewmen_controller = get_node("/root/Main/Submarine/CrewmenController")
@@ -193,10 +214,10 @@ func advance_dialog(choice):
 
             if current_time < crewman.last_dialog_time + Globals.BUGGER_OFF_TIME:
                 dialog_state = DialogState.BuggerOff
-                hud.show_dialog("Bugger Off!", ["As you were"])
+                hud.show_dialog(bugger_off_message(), ["As you were"])
             else:
                 dialog_state = DialogState.Banter
-                hud.show_dialog("Banter!", ["A crewmate", "A room", "As you were"])
+                hud.show_dialog(greeting_message(), ["A crewmate", "A room", "As you were"])
         DialogState.BuggerOff:
             match choice:
                 0:
@@ -208,7 +229,7 @@ func advance_dialog(choice):
                     var suspects = get_unenquired_suspect_names(crewman)
                     if suspects.size():
                         dialog_state = DialogState.CrewInterrogation
-                        hud.show_dialog("Accuse a person!", suspects)
+                        hud.show_dialog("Who do you wan't to know about?", suspects)
                     else:
                         dialog_state = DialogState.BuggerOff
                         hud.show_dialog("Stop harassing me! I can't think of a single person you haven't asked me about!", ["As you were"])
@@ -216,7 +237,7 @@ func advance_dialog(choice):
                     var locations = get_unenquired_potential_location_names(crewman)
                     if locations.size():
                         dialog_state = DialogState.RoomInterrogation
-                        hud.show_dialog("Accuse a room!", locations)
+                        hud.show_dialog("Where do you want to know about?", locations)
                     else:
                         dialog_state = DialogState.BuggerOff
                         hud.show_dialog("Stop harassing me! I can't think of a single place you haven't asked me about!", ["As you were"])
@@ -228,10 +249,10 @@ func advance_dialog(choice):
             var chosen_suspect = suspects[choice]
             crewman.enquired_crew.append(chosen_suspect)
             
-            var msg = "I do not know this person"
+            var msg = maybe_this_person_messages()
             
             if crewman_clear_suspect(interrogatee, chosen_suspect):
-                msg = "I know it wasn't him!"
+                msg = not_this_person_message()
                 rule_out_person(chosen_suspect)
                 if is_solved():
                     emit_signal("case_closed", "You did it!")
@@ -243,13 +264,14 @@ func advance_dialog(choice):
             var chosen_location = locations[choice]
             crewman.enquired_rooms.append(chosen_location)
             
-            var msg = "I do not know this place"
+            var msg = maybe_this_place_message()
             
             if crewman_clear_location(interrogatee, chosen_location):
-                msg = "I know it didn't happen there!"
+                msg = not_this_place_message()
                 rule_out_location(chosen_location)
                 if is_solved():
-                    emit_signal("case_closed", "You did it!")
+                    msg = case_closed_message(get_potential_locations()[0], get_suspect_names()[0])
+                    emit_signal("case_closed", msg)
 
             dialog_state = DialogState.Response
             hud.show_dialog(msg, ["Ask another question", "As you were"])
@@ -258,7 +280,7 @@ func advance_dialog(choice):
             match choice:
                 0:
                     dialog_state = DialogState.BuggerOff
-                    hud.show_dialog("Bugger Off!", ["As you were"])
+                    hud.show_dialog(bugger_off_message(), ["As you were"])
                 1:
                     dialog_state = DialogState.None
                     end_dialog()
